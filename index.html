@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRL2SVN0YF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XRL2SVN0YF');
+    </script>
+    
+
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-    <meta name="version" content="1.0.2">
+    <meta name="version" content="1.0.4">
+    <meta name="gs-app-id" content="quotle">
     <title>Quotle - Daily Quote Puzzle</title>
     
     <!-- Early initialization: Set defaults and apply dark mode BEFORE any CSS renders -->
@@ -23,7 +34,16 @@
     </script>
     
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ð</text></svg>">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8B2635">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Quotle">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Daily quote guessing game. Identify the author in 4 tries! Featuring wisdom from ancient philosophers to literary giants.">
@@ -1259,7 +1279,7 @@
         }
         
         .share-btn::before {
-            content: '📤';
+            content: 'ð¤';
             font-size: 1.2rem;
         }
         
@@ -2864,7 +2884,7 @@
                 case 'syncing':
                     indicator.style.display = 'flex';
                     indicator.classList.add('syncing');
-                    icon.textContent = '🔄';
+                    icon.textContent = 'ð';
                     indicator.title = 'Syncing...';
                     break;
                 case 'synced':
@@ -2875,7 +2895,7 @@
                 case 'error':
                     indicator.style.display = 'flex';
                     indicator.classList.add('error');
-                    icon.textContent = '⚠️';
+                    icon.textContent = 'â ï¸';
                     indicator.title = 'Sync error - Click to retry';
                     break;
             }
@@ -2929,9 +2949,9 @@
                 if (error.code === 'auth/popup-blocked') {
                     alert('Popup was blocked. Please allow popups for this site.');
                 } else if (error.code === 'auth/unauthorized-domain') {
-                    alert('This domain is not authorized for Google Sign-In.\n\nTo fix: Go to Firebase Console → Authentication → Settings → Authorized domains and add this domain.');
+                    alert('This domain is not authorized for Google Sign-In.\n\nTo fix: Go to Firebase Console â Authentication â Settings â Authorized domains and add this domain.');
                 } else if (error.code === 'auth/operation-not-allowed') {
-                    alert('Google Sign-In is not enabled.\n\nTo fix: Go to Firebase Console → Authentication → Sign-in method → Enable Google.');
+                    alert('Google Sign-In is not enabled.\n\nTo fix: Go to Firebase Console â Authentication â Sign-in method â Enable Google.');
                 } else {
                     alert('Sign in failed: ' + error.message);
                 }
@@ -3146,7 +3166,7 @@
                             <span class="account-sync" id="sync-status">${getSyncStatusText()}</span>
                         </div>
                         <div class="account-actions">
-                            <button type="button" class="action-btn-small" onclick="GSAuth.sync()">↻ Sync</button>
+                            <button type="button" class="action-btn-small" onclick="GSAuth.sync()">â» Sync</button>
                             <button type="button" class="action-btn-small" onclick="GSAuth.signOut()">Sign Out</button>
                         </div>
                     </div>
@@ -3159,7 +3179,7 @@
                             Cloud sync & extra features
                         </p>
                         <button type="button" class="action-btn disabled" disabled title="Turn off Plain Mode to sign in">
-                            🔒 Sign in with Google
+                            ð Sign in with Google
                         </button>
                         <p style="font-size: 0.75rem; color: var(--slate); margin-top: 8px;">
                             Turn off Plain Mode below to enable
@@ -3171,7 +3191,7 @@
                     <div class="account-signed-out">
                         <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 10px;">Save progress across devices</p>
                         <button type="button" class="action-btn" onclick="GSAuth.signIn().catch(e => console.error('SignIn error:', e));">
-                            🔐 Sign in with Google
+                            ð Sign in with Google
                         </button>
                     </div>
                 `;
@@ -3190,9 +3210,9 @@
             const el = document.getElementById('sync-status');
             if (!el) return;
             switch (status) {
-                case 'syncing': el.textContent = '🔄 Syncing...'; break;
+                case 'syncing': el.textContent = 'ð Syncing...'; break;
                 case 'synced': el.textContent = getSyncStatusText(); break;
-                case 'error': el.textContent = '⚠️ Sync failed'; break;
+                case 'error': el.textContent = 'â ï¸ Sync failed'; break;
             }
         }
         
@@ -3216,7 +3236,7 @@
     </script>
     <div class="container">
         <div class="menu-bar">
-            <button class="menu-btn" type="button" onclick="openAchievementsModal()" aria-label="View Achievements">🏆<span class="menu-text"> Achievements</span></button>
+            <button class="menu-btn" type="button" onclick="openAchievementsModal()" aria-label="View Achievements">ð<span class="menu-text"> Achievements</span></button>
             <div class="sync-indicator" id="sync-indicator" onclick="openDifficultyModal()" title="Cloud sync status" style="display: none;">
                 <span class="sync-icon" id="sync-icon">&#9729;</span>
             </div>
@@ -3225,13 +3245,13 @@
         
         <div class="header">
             <div class="token-display" id="token-display" title="Hint Tokens">
-                <span class="token-icon">💎</span>
+                <span class="token-icon">ð</span>
                 <span id="token-count">0</span>
             </div>
             <h1 class="title">Quotle</h1>
             <p class="subtitle" id="subtitle-text">Daily Quote Puzzle &bull; 4 Tries</p>
             <div class="challenge-badge" id="challenge-badge" style="display: none;">
-                <span class="challenge-badge-icon" id="challenge-icon">📚</span>
+                <span class="challenge-badge-icon" id="challenge-icon">ð</span>
                 <span class="challenge-badge-text" id="challenge-text">Literature</span>
             </div>
         </div>
@@ -3240,7 +3260,7 @@
             <div class="quote-container">
                 <div class="quote-display" id="quote-display" onclick="speakQuote()" title="Click to listen"></div>
             </div>
-            <button class="tts-btn" type="button" id="tts-btn" onclick="speakQuote()" title="Listen to quote" aria-label="Listen to quote">🔊 Listen to Quote</button>
+            <button class="tts-btn" type="button" id="tts-btn" onclick="speakQuote()" title="Listen to quote" aria-label="Listen to quote">ð Listen to Quote</button>
             
             <div class="attempts" id="attempts-display"></div>
             
@@ -3251,7 +3271,7 @@
                         <div class="autocomplete-dropdown" id="autocomplete-dropdown"></div>
                         <input type="hidden" id="author-select" value="">
                     </div>
-                    <button type="button" id="submit-btn" onclick="submitGuess()" title="Submit Guess" aria-label="Submit Guess">➤</button>
+                    <button type="button" id="submit-btn" onclick="submitGuess()" title="Submit Guess" aria-label="Submit Guess">â¤</button>
                 </div>
                 <button type="button" id="give-up-btn" onclick="confirmGiveUp()" style="
                     display: none;
@@ -3265,33 +3285,33 @@
                     font-size: 0.8rem;
                     cursor: pointer;
                     transition: all 0.2s;
-                " title="Reveal the answer">🏳️ Give Up</button>
+                " title="Reveal the answer">ð³ï¸ Give Up</button>
             </div>
             
             <div class="hint-section" id="hint-section" style="display: none;">
                 <div class="hint-box">
-                    <div class="hint-label">💡 Bonus Hint</div>
+                    <div class="hint-label">ð¡ Bonus Hint</div>
                     <div class="hint-text" id="hint-text"></div>
                 </div>
             </div>
             
             <div class="hint-section" id="location-hint-section" style="display: none;">
                 <div class="hint-box location-hint">
-                    <div class="hint-label">📍 Location & Time</div>
+                    <div class="hint-label">ð Location & Time</div>
                     <div class="hint-text" id="location-hint-text"></div>
                 </div>
             </div>
             
             <!-- Token Hints Section -->
             <div class="hint-tokens-section" id="token-hints-section">
-                <div style="font-weight: 600; margin-bottom: 10px; text-align: center;">💎 Spend Tokens for Hints</div>
+                <div style="font-weight: 600; margin-bottom: 10px; text-align: center;">ð Spend Tokens for Hints</div>
                 <button type="button" class="hint-token-btn" id="first-letter-hint-btn" onclick="useFirstLetterHint()">
-                    <span>🔤 Reveal First Letter</span>
-                    <span class="hint-token-cost">💎 1</span>
+                    <span>ð¤ Reveal First Letter</span>
+                    <span class="hint-token-cost">ð 1</span>
                 </button>
                 <button type="button" class="hint-token-btn" id="narrow-authors-hint-btn" onclick="useNarrowAuthorsHint()">
-                    <span>👥 Narrow to 5 Authors</span>
-                    <span class="hint-token-cost">💎 2</span>
+                    <span>ð¥ Narrow to 5 Authors</span>
+                    <span class="hint-token-cost">ð 2</span>
                 </button>
             </div>
             
@@ -3308,7 +3328,7 @@
     <div id="settings-modal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('settings-modal')" type="button">&times;</button>
-            <h2 class="modal-title">📋 Menu</h2>
+            <h2 class="modal-title">ð Menu</h2>
             
             <!-- 0. ACCOUNT (Cloud Sync) -->
             <div class="modal-section">
@@ -3318,7 +3338,7 @@
                     <div class="account-signed-out">
                         <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 10px;">Save progress across devices</p>
                         <button type="button" class="action-btn" onclick="GSAuth.signIn().catch(e => console.error('SignIn error:', e));">
-                            🔐 Sign in with Google
+                            ð Sign in with Google
                         </button>
                     </div>
                 </div>
@@ -3328,18 +3348,18 @@
             <div class="modal-section">
                 <h3>&#9881; Difficulty</h3>
                 <div class="difficulty-option" id="easy-option" onclick="setDifficulty('easy')">
-                    <h4>🟢 Easy Mode</h4>
+                    <h4>ð¢ Easy Mode</h4>
                     <p>Dropdown filters to matching authors. Get hints for Gender, Category, and Time Period after each guess.</p>
                 </div>
                 <div class="difficulty-option" id="hard-option" onclick="setDifficulty('hard')">
-                    <h4>🔴 Hard Mode</h4>
+                    <h4>ð´ Hard Mode</h4>
                     <p>No filtering, no attribute hints - just guess based on the quote alone!</p>
                 </div>
             </div>
             
             <!-- 2. DISPLAY -->
             <div class="modal-section">
-                <h3>🎨 Display</h3>
+                <h3>ð¨ Display</h3>
                 <div class="setting-row">
                     <span>Dark Mode</span>
                     <label class="toggle-switch">
@@ -3351,7 +3371,7 @@
             
             <!-- 3. SOUND -->
             <div class="modal-section">
-                <h3>🔊 Sound</h3>
+                <h3>ð Sound</h3>
                 <div class="setting-row">
                     <span>Sound Effects</span>
                     <label class="toggle-switch">
@@ -3359,12 +3379,12 @@
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
-                <button type="button" onclick="testSounds()" class="action-btn-small">🔊 Test Sounds</button>
+                <button type="button" onclick="testSounds()" class="action-btn-small">ð Test Sounds</button>
             </div>
             
             <!-- 4. TUTORIAL -->
             <div class="modal-section">
-                <h3>📖 Tutorial</h3>
+                <h3>ð Tutorial</h3>
                 <div class="setting-row">
                     <span>Show on First Visit</span>
                     <label class="toggle-switch">
@@ -3372,19 +3392,19 @@
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
-                <button type="button" onclick="replayTutorial()" class="action-btn">🎓 Replay Tutorial</button>
+                <button type="button" onclick="replayTutorial()" class="action-btn">ð Replay Tutorial</button>
             </div>
             
             <!-- 5. PRACTICE MODE -->
             <div class="modal-section" id="practice-mode-settings">
-                <h3>📅 Practice Mode</h3>
+                <h3>ð Practice Mode</h3>
                 <p class="section-desc">Play any past puzzle! Stats tracked separately.</p>
                 <button type="button" class="action-btn primary" onclick="openPracticeModal()">Browse Past Puzzles</button>
             </div>
             
             <!-- 6. PLAIN MODE (Optional/Advanced) -->
             <div class="modal-section">
-                <h3>🎯 Plain Mode</h3>
+                <h3>ð¯ Plain Mode</h3>
                 <div class="setting-row">
                     <span>Classic experience</span>
                     <label class="toggle-switch">
@@ -3397,25 +3417,25 @@
             
             <!-- 7. HOW TO PLAY -->
             <div class="modal-section" id="how-to-play-section">
-                <h3>❓ How to Play</h3>
+                <h3>â How to Play</h3>
                 <p>Guess the author of the daily quote in 4 tries or less!</p>
                 <p style="margin-top: 8px;">After each guess, you'll receive hints about:</p>
                 <ul style="margin: 8px 0 8px 20px; line-height: 1.6;">
-                    <li>✓ Gender (if correct)</li>
-                    <li>✓ Category (Literature, Philosophy, etc.)</li>
-                    <li>✓ Time Period (Ancient to Modern)</li>
+                    <li>â Gender (if correct)</li>
+                    <li>â Category (Literature, Philosophy, etc.)</li>
+                    <li>â Time Period (Ancient to Modern)</li>
                 </ul>
                 
                 <div id="token-info-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle, rgba(0,0,0,0.1));">
-                    <p><strong>💎 Hint Tokens:</strong> Earn tokens by winning! Spend on extra hints:</p>
+                    <p><strong>ð Hint Tokens:</strong> Earn tokens by winning! Spend on extra hints:</p>
                     <ul style="margin: 5px 0 0 20px; line-height: 1.5; font-size: 0.9rem;">
-                        <li>🔤 First Letter - 1 token</li>
-                        <li>👥 Narrow to 5 authors - 2 tokens</li>
+                        <li>ð¤ First Letter - 1 token</li>
+                        <li>ð¥ Narrow to 5 authors - 2 tokens</li>
                     </ul>
                 </div>
                 
                 <details style="margin-top: 12px;">
-                    <summary style="cursor: pointer; color: var(--burgundy); font-weight: 600;">⌨️ Keyboard Shortcuts</summary>
+                    <summary style="cursor: pointer; color: var(--burgundy); font-weight: 600;">â¨ï¸ Keyboard Shortcuts</summary>
                     <ul style="margin: 8px 0 0 20px; line-height: 1.6; font-size: 0.85rem;">
                         <li><kbd>Enter</kbd> - Submit guess</li>
                         <li><kbd>S</kbd> - Open menu</li>
@@ -3429,12 +3449,12 @@
             
             <!-- 8. GAME INFO -->
             <div class="modal-section">
-                <h3>ℹ️ Game Info</h3>
+                <h3>â¹ï¸ Game Info</h3>
                 <div class="info-grid">
                     <p><strong>Quote #:</strong> <span id="current-quote-number">Loading...</span></p>
                     <p><strong>Total Quotes:</strong> 365</p>
                     <p><strong>Days Live:</strong> <span id="days-since-launch">Loading...</span></p>
-                    <p><strong>Version:</strong> v1.0.2</p>
+                    <p><strong>Version:</strong> v1.0.4</p>
                 </div>
                 <p style="margin-top: 10px; font-size: 0.85rem; color: var(--slate); line-height: 1.5;">
                     A daily quote guessing game featuring wisdom from ancient philosophers to modern thinkers - spanning over 2,500 years of human thought.
@@ -3443,7 +3463,7 @@
             
             <!-- 9. DATA -->
             <div class="modal-section">
-                <h3>🗑️ Data</h3>
+                <h3>ðï¸ Data</h3>
                 <button type="button" class="action-btn danger" onclick="resetGameFromMenu()">Reset Statistics</button>
                 <p class="section-desc" style="margin-top: 10px;">
                     <strong>Copyright:</strong> All quotes are from public domain sources. Authors represented died before 1955 or their works have entered the public domain.
@@ -3485,7 +3505,7 @@
     <div id="confirm-modal" class="modal">
         <div class="modal-content" style="max-width: 400px; text-align: center;">
             <button class="modal-close" onclick="closeModal('confirm-modal')" type="button">&times;</button>
-            <h2 class="modal-title" style="font-size: 1.5rem;">⚠️ Confirm Reset</h2>
+            <h2 class="modal-title" style="font-size: 1.5rem;">â ï¸ Confirm Reset</h2>
             <p style="margin: 20px 0; line-height: 1.6;">Are you sure you want to reset your stats and play today's puzzle again?</p>
             <p style="margin-bottom: 25px; color: var(--slate); font-size: 0.9rem;">This will clear all your statistics.</p>
             <div style="display: flex; gap: 12px; justify-content: center;">
@@ -3498,7 +3518,7 @@
     <!-- Tutorial Choice Modal (first-time players) -->
     <div class="tutorial-modal" id="tutorial-choice-modal">
         <div class="tutorial-modal-content" style="max-width: 420px;">
-            <h2>👋 Welcome to Quotle!</h2>
+            <h2>ð Welcome to Quotle!</h2>
             
             <div style="text-align: left;">
                 <p>Guess the author of the daily quote in <strong>4 tries or less</strong>!</p>
@@ -3507,12 +3527,12 @@
             
             <div style="margin-top: 25px;">
                 <button class="tutorial-btn tutorial-btn-primary" onclick="startTutorial()" type="button">
-                    🎓 Yes, show me how to play<br>
+                    ð Yes, show me how to play<br>
                     <span style="font-size: 0.85rem; opacity: 0.8;">(Quick walkthrough)</span>
                 </button>
                 
                 <button class="tutorial-btn tutorial-btn-secondary" onclick="skipTutorial()" type="button">
-                    🚀 I know the rules, let's go!<br>
+                    ð I know the rules, let's go!<br>
                     <span style="font-size: 0.85rem; opacity: 0.8;">(Start today's quote)</span>
                 </button>
             </div>
@@ -3522,7 +3542,7 @@
     <!-- Tutorial Walkthrough Modal (step-by-step guide) -->
     <div class="tutorial-modal" id="tutorial-walkthrough-modal">
         <div class="tutorial-modal-content" style="max-width: 480px; position: relative;">
-            <button class="tutorial-close-x" onclick="exitTutorialWalkthrough()" type="button">✕</button>
+            <button class="tutorial-close-x" onclick="exitTutorialWalkthrough()" type="button">â</button>
             
             <!-- Step indicator -->
             <div id="tutorial-step-indicator" style="display: flex; justify-content: center; gap: 8px; margin-bottom: 20px;">
@@ -3569,13 +3589,13 @@
                 <h2>Step 3: Getting Hints</h2>
                 <div class="tutorial-example tutorial-example-dark">
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                        <span style="font-size: 1.2rem;">❌</span>
+                        <span style="font-size: 1.2rem;">â</span>
                         <span style="font-weight: 600;">Winston Churchill</span>
                     </div>
                     <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                        <span style="background: var(--sage); color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">✓ Male</span>
-                        <span style="background: #ddd; color: #666; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">✗ Speech</span>
-                        <span style="background: #ddd; color: #666; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">✗ 1900s</span>
+                        <span style="background: var(--sage); color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">â Male</span>
+                        <span style="background: #ddd; color: #666; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">â Speech</span>
+                        <span style="background: #ddd; color: #666; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">â 1900s</span>
                     </div>
                 </div>
                 <p>After each wrong guess, you'll see hints about the correct author:</p>
@@ -3591,25 +3611,25 @@
                 <h2>Step 4: Win & Share!</h2>
                 <div class="tutorial-example">
                     <div style="text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">🎉</div>
+                        <div style="font-size: 2rem; margin-bottom: 10px;">ð</div>
                         <div style="font-weight: bold; color: var(--burgundy); font-size: 1.1rem;">Correct!</div>
                         <div style="margin-top: 8px; color: var(--ink);">Franklin D. Roosevelt</div>
                         <div style="margin-top: 15px; font-family: monospace; font-size: 0.85rem; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px; text-align: left;">
-                            📖 Quotle #42 ✅<br>
-                            🟥🟩⬜⬜<br>
-                            2/4 · ⭐6/10<br>
-                            🟢 Easy · 🔥5
+                            ð Quotle #42 â<br>
+                            ð¥ð©â¬â¬<br>
+                            2/4 Â· â­6/10<br>
+                            ð¢ Easy Â· ð¥5
                         </div>
                     </div>
                 </div>
                 <p><strong>Share your results</strong> with friends! The emoji grid shows your guessing journey.</p>
-                <p style="margin-top: 10px;">💡 <strong>Pro tip:</strong> In Easy Mode, bonus hints appear after your 2nd and 3rd incorrect guesses!</p>
+                <p style="margin-top: 10px;">ð¡ <strong>Pro tip:</strong> In Easy Mode, bonus hints appear after your 2nd and 3rd incorrect guesses!</p>
             </div>
             
             <!-- Navigation buttons -->
             <div class="tutorial-nav">
-                <button class="tutorial-btn tutorial-btn-ghost" id="tutorial-prev-btn" onclick="prevTutorialStep()" type="button" style="display: none;">← Back</button>
-                <button class="tutorial-btn tutorial-btn-primary" id="tutorial-next-btn" onclick="nextTutorialStep()" type="button">Next →</button>
+                <button class="tutorial-btn tutorial-btn-ghost" id="tutorial-prev-btn" onclick="prevTutorialStep()" type="button" style="display: none;">â Back</button>
+                <button class="tutorial-btn tutorial-btn-primary" id="tutorial-next-btn" onclick="nextTutorialStep()" type="button">Next â</button>
             </div>
             <button class="tutorial-btn tutorial-btn-ghost" onclick="exitTutorialWalkthrough()" type="button" style="margin-top: 10px; border: none; color: var(--slate);">Skip tutorial</button>
         </div>
@@ -3619,13 +3639,13 @@
     <div id="practice-modal" class="modal">
         <div class="modal-content" style="max-width: 450px;">
             <button class="modal-close" onclick="closeModal('practice-modal')" type="button">&times;</button>
-            <h2 class="modal-title">📅 Practice Mode</h2>
+            <h2 class="modal-title">ð Practice Mode</h2>
             <p style="text-align: center; color: var(--slate); margin-bottom: 15px;">Select a past puzzle to play</p>
             
             <div class="date-picker-header">
-                <button type="button" class="date-picker-nav" id="prev-month" onclick="changeMonth(-1)" aria-label="Previous month">◀</button>
+                <button type="button" class="date-picker-nav" id="prev-month" onclick="changeMonth(-1)" aria-label="Previous month">â</button>
                 <span class="date-picker-month" id="current-month">January 2026</span>
-                <button type="button" class="date-picker-nav" id="next-month" onclick="changeMonth(1)" aria-label="Next month">▶</button>
+                <button type="button" class="date-picker-nav" id="next-month" onclick="changeMonth(1)" aria-label="Next month">â¶</button>
             </div>
             
             <div class="date-picker-grid" id="date-picker-grid">
@@ -3681,7 +3701,7 @@
     <div id="give-up-modal" class="modal">
         <div class="modal-content" style="max-width: 400px; text-align: center;">
             <button class="modal-close" onclick="closeModal('give-up-modal')" type="button">&times;</button>
-            <h2 class="modal-title" style="font-size: 1.5rem;">🏳️ Give Up?</h2>
+            <h2 class="modal-title" style="font-size: 1.5rem;">ð³ï¸ Give Up?</h2>
             <p style="margin: 20px 0; line-height: 1.6;">Are you sure you want to reveal the answer?</p>
             <p style="margin-bottom: 25px; color: var(--slate); font-size: 0.9rem;">This will count as a loss and end the game.</p>
             <div style="display: flex; gap: 12px; justify-content: center;">
@@ -3695,7 +3715,7 @@
     <div id="achievements-modal" class="modal">
         <div class="modal-content" style="max-width: 500px;">
             <button class="modal-close" onclick="closeModal('achievements-modal')" type="button">&times;</button>
-            <h2 class="modal-title">🏆 Achievements</h2>
+            <h2 class="modal-title">ð Achievements</h2>
             <p style="text-align: center; color: var(--slate); margin-bottom: 5px;">
                 <span id="achievements-count">0</span> of <span id="achievements-total">0</span> unlocked
             </p>
@@ -3705,7 +3725,7 @@
 
     <!-- Achievement Toast -->
     <div id="achievement-toast" class="achievement-toast" role="alert" aria-live="polite">
-        <div class="achievement-toast-icon" id="toast-icon">🏆</div>
+        <div class="achievement-toast-icon" id="toast-icon">ð</div>
         <div class="achievement-toast-text">
             <div class="achievement-toast-title">Achievement Unlocked!</div>
             <div class="achievement-toast-name" id="toast-name">First Win</div>
@@ -3714,7 +3734,7 @@
 
     <!-- Token Earned Toast -->
     <div id="token-toast" class="token-earned-toast" role="alert" aria-live="polite">
-        <span id="token-toast-text">+1 💎 Token Earned!</span>
+        <span id="token-toast-text">+1 ð Token Earned!</span>
     </div>
 
     <!-- Game Shelf Integration Module -->
@@ -3736,7 +3756,7 @@
                     this.gameId = gameId;
                     this.gameConfig = {
                         name: config.name || gameId,
-                        icon: config.icon || '🎮',
+                        icon: config.icon || 'ð®',
                         url: config.url || window.location.hostname,
                         version: config.version || '1.0.2',
                         type: config.type || 'daily',
@@ -3744,7 +3764,7 @@
                     };
                     this._initialized = true;
                     this._announcePresence();
-                    console.log(`🎮 Game Shelf Integration initialized for ${this.gameConfig.name}`);
+                    console.log(`ð® Game Shelf Integration initialized for ${this.gameConfig.name}`);
                 },
                 
                 reportComplete: function(result) {
@@ -3855,7 +3875,7 @@
                 category: "Speech",
                 period: "Ancient",
                 difficulty: 6,
-                hint: "He never wrote anything—his ideas survive through his students.",
+                hint: "He never wrote anythingâhis ideas survive through his students.",
                 location: "Athens, Greece",
                 year: "400 BCE"
             },
@@ -3879,7 +3899,7 @@
                 category: "Literature",
                 period: "1300s",
                 difficulty: 8,
-                hint: "He wrote the Divine Comedy in Italian, not Latin—revolutionary for his time.",
+                hint: "He wrote the Divine Comedy in Italian, not Latinârevolutionary for his time.",
                 location: "Florence, Italy",
                 year: "1310s"
             },
@@ -4090,7 +4110,7 @@
             {
                 index: 23,
                 text: "Never was anything great achieved without danger.",
-                author: "Niccolò Machiavelli",
+                author: "NiccolÃ² Machiavelli",
                 gender: "Male",
                 category: "Literature",
                 period: "1500s",
@@ -4179,7 +4199,7 @@
                 category: "Literature",
                 period: "1600s",
                 difficulty: 8,
-                hint: "Seven years of his life are unaccounted for—the 'lost years.'",
+                hint: "Seven years of his life are unaccounted forâthe 'lost years.'",
                 location: "Stratford-upon-Avon, England",
                 year: "1600s"
             },
@@ -4366,7 +4386,7 @@
             {
                 index: 46,
                 text: "It is not enough to have a good mind; the main thing is to use it well.",
-                author: "René Descartes",
+                author: "RenÃ© Descartes",
                 gender: "Male",
                 category: "Literature",
                 period: "1600s",
@@ -4527,7 +4547,7 @@
                 category: "Literature",
                 period: "Ancient",
                 difficulty: 8,
-                hint: "His teachings were passed down by students—he never wrote books himself.",
+                hint: "His teachings were passed down by studentsâhe never wrote books himself.",
                 location: "Lu State, China",
                 year: "500 BCE"
             },
@@ -4846,7 +4866,7 @@
             {
                 index: 86,
                 text: "Intelligence without ambition is a bird without wings.",
-                author: "Salvador Dalí",
+                author: "Salvador DalÃ­",
                 gender: "Male",
                 category: "Speech",
                 period: "1900s",
@@ -4959,7 +4979,7 @@
                 category: "Speech",
                 period: "1800s",
                 difficulty: 9,
-                hint: "She appeared on the US dollar coin—the first woman so honored.",
+                hint: "She appeared on the US dollar coinâthe first woman so honored.",
                 location: "Rochester, New York, USA",
                 year: "1870s"
             },
@@ -5002,7 +5022,7 @@
             {
                 index: 99,
                 text: "I would always rather be happy than dignified.",
-                author: "Charlotte Brontë",
+                author: "Charlotte BrontÃ«",
                 gender: "Female",
                 category: "Literature",
                 period: "1800s",
@@ -5079,7 +5099,7 @@
                 category: "Speech",
                 period: "1800s",
                 difficulty: 7,
-                hint: "He was the only US President to hold a patent—for a device to lift boats over shoals.",
+                hint: "He was the only US President to hold a patentâfor a device to lift boats over shoals.",
                 location: "Springfield, Illinois, USA",
                 year: "1860s"
             },
@@ -5169,7 +5189,7 @@
             },
             {
                 index: 113,
-                text: "Your limitation—it's only your imagination.",
+                text: "Your limitationâit's only your imagination.",
                 author: "Unknown",
                 gender: "Male",
                 category: "Philosophy",
@@ -5235,7 +5255,7 @@
                 category: "Literature",
                 period: "1800s",
                 difficulty: 6,
-                hint: "He wrote 'Les Misérables' while in exile for opposing Napoleon III.",
+                hint: "He wrote 'Les MisÃ©rables' while in exile for opposing Napoleon III.",
                 location: "Paris, France",
                 year: "1860s"
             },
@@ -5410,7 +5430,7 @@
             {
                 index: 133,
                 text: "We do not see things as they are, we see them as we are.",
-                author: "Anaïs Nin",
+                author: "AnaÃ¯s Nin",
                 gender: "Female",
                 category: "Literature",
                 period: "1900s",
@@ -5547,7 +5567,7 @@
                 category: "Literature",
                 period: "Ancient",
                 difficulty: 8,
-                hint: "He wrote on nearly every subject—from biology to poetry to politics.",
+                hint: "He wrote on nearly every subjectâfrom biology to poetry to politics.",
                 location: "Athens, Greece",
                 year: "350 BCE"
             },
@@ -5614,7 +5634,7 @@
             {
                 index: 150,
                 text: "Everyone sees what you appear to be, few experience what you really are.",
-                author: "Niccolò Machiavelli",
+                author: "NiccolÃ² Machiavelli",
                 gender: "Male",
                 category: "Literature",
                 period: "1500s",
@@ -5866,7 +5886,7 @@
             {
                 index: 171,
                 text: "Doubt is the origin of wisdom.",
-                author: "René Descartes",
+                author: "RenÃ© Descartes",
                 gender: "Male",
                 category: "Literature",
                 period: "1600s",
@@ -5931,7 +5951,7 @@
                 category: "Speech",
                 period: "1900s",
                 difficulty: 6,
-                hint: "She held 348 press conferences as First Lady—but only women reporters could attend.",
+                hint: "She held 348 press conferences as First Ladyâbut only women reporters could attend.",
                 location: "New York City, USA",
                 year: "1940s"
             },
@@ -6387,7 +6407,7 @@
                 category: "Literature",
                 period: "1800s",
                 difficulty: 9,
-                hint: "He proposed to Lou Salomé three times; she refused each time.",
+                hint: "He proposed to Lou SalomÃ© three times; she refused each time.",
                 location: "Basel, Switzerland",
                 year: "1880s"
             },
@@ -6478,7 +6498,7 @@
             {
                 index: 222,
                 text: "I am no bird; and no net ensnares me.",
-                author: "Charlotte Brontë",
+                author: "Charlotte BrontÃ«",
                 gender: "Female",
                 category: "Literature",
                 period: "1800s",
@@ -6495,7 +6515,7 @@
                 category: "Speech",
                 period: "1900s",
                 difficulty: 8,
-                hint: "She was the first woman to win a Nobel Prize—and the first person to win two.",
+                hint: "She was the first woman to win a Nobel Prizeâand the first person to win two.",
                 location: "Paris, France",
                 year: "1910s"
             },
@@ -6561,7 +6581,7 @@
             },
             {
                 index: 229,
-                text: "Keep your face always toward the sunshine—and shadows will fall behind you.",
+                text: "Keep your face always toward the sunshineâand shadows will fall behind you.",
                 author: "Walt Whitman",
                 gender: "Male",
                 category: "Literature",
@@ -6651,7 +6671,7 @@
                 category: "Literature",
                 period: "1900s",
                 difficulty: 7,
-                hint: "He won both a Nobel Prize and an Oscar—the only person to do so.",
+                hint: "He won both a Nobel Prize and an Oscarâthe only person to do so.",
                 location: "Dublin, Ireland",
                 year: "1910s"
             },
@@ -6910,7 +6930,7 @@
             {
                 index: 258,
                 text: "Have no fear of perfection - you'll never reach it.",
-                author: "Salvador Dalí",
+                author: "Salvador DalÃ­",
                 gender: "Male",
                 category: "Speech",
                 period: "1900s",
@@ -6946,7 +6966,7 @@
             {
                 index: 261,
                 text: "I postpone death by living, by suffering, by error, by risking, by giving, by losing.",
-                author: "Anaïs Nin",
+                author: "AnaÃ¯s Nin",
                 gender: "Female",
                 category: "Literature",
                 period: "1900s",
@@ -6982,7 +7002,7 @@
             {
                 index: 264,
                 text: "It is better to be feared than loved, if you cannot be both.",
-                author: "Niccolò Machiavelli",
+                author: "NiccolÃ² Machiavelli",
                 gender: "Male",
                 category: "Literature",
                 period: "1500s",
@@ -7258,12 +7278,12 @@
             {
                 index: 287,
                 text: "I think, therefore I am.",
-                author: "René Descartes",
+                author: "RenÃ© Descartes",
                 gender: "Male",
                 category: "Literature",
                 period: "1600s",
                 difficulty: 5,
-                hint: "He moved to Sweden to tutor Queen Christina—and died from the early hours she demanded.",
+                hint: "He moved to Sweden to tutor Queen Christinaâand died from the early hours she demanded.",
                 location: "Amsterdam, Netherlands",
                 year: "1640s"
             },
@@ -7383,7 +7403,7 @@
                 category: "Literature",
                 period: "Ancient",
                 difficulty: 6,
-                hint: "His existence is debated by historians—he may be a legendary figure.",
+                hint: "His existence is debated by historiansâhe may be a legendary figure.",
                 location: "Wu Kingdom, China",
                 year: "500 BCE"
             },
@@ -7870,7 +7890,7 @@
             {
                 index: 338,
                 text: "Conventionality is not morality.",
-                author: "Charlotte Brontë",
+                author: "Charlotte BrontÃ«",
                 gender: "Female",
                 category: "Literature",
                 period: "1800s",
@@ -8139,7 +8159,7 @@
                 category: "Literature",
                 period: "1900s",
                 difficulty: 8,
-                hint: "He was a believer in the supernatural and conducted séances.",
+                hint: "He was a believer in the supernatural and conducted sÃ©ances.",
                 location: "Dublin, Ireland",
                 year: "1920s"
             },
@@ -8187,19 +8207,19 @@
                 category: "Philosophy",
                 period: "1900s",
                 difficulty: 7,
-                hint: "She was the first woman to take the agrégation exam in philosophy.",
+                hint: "She was the first woman to take the agrÃ©gation exam in philosophy.",
                 location: "Paris, France",
                 year: "1950s"
             },
             {
                 index: 365,
                 text: "Each friend represents a world in us, a world not born until they arrive.",
-                author: "Anaïs Nin",
+                author: "AnaÃ¯s Nin",
                 gender: "Female",
                 category: "Literature",
                 period: "1900s",
                 difficulty: 8,
-                hint: "She kept a diary from age 11 until her death—spanning over 60 years.",
+                hint: "She kept a diary from age 11 until her deathâspanning over 60 years.",
                 location: "Paris, France",
                 year: "1940s"
             }
@@ -8473,7 +8493,7 @@
             const nextBtn = document.getElementById('tutorial-next-btn');
             
             prevBtn.style.display = currentTutorialStep === 1 ? 'none' : 'block';
-            nextBtn.textContent = currentTutorialStep === totalTutorialSteps ? "Let's Play! 🎮" : 'Next →';
+            nextBtn.textContent = currentTutorialStep === totalTutorialSteps ? "Let's Play! ð®" : 'Next â';
         }
         
         function nextTutorialStep() {
@@ -8571,40 +8591,40 @@
         // Achievement System
         const ACHIEVEMENTS = [
             // Milestone Achievements
-            { id: 'first_win', name: 'First Steps', icon: '🎯', desc: 'Win your first game', check: (s) => s.gamesWon >= 1 },
-            { id: 'wins_10', name: 'Getting Started', icon: '📚', desc: 'Win 10 games', check: (s) => s.gamesWon >= 10 },
-            { id: 'wins_50', name: 'Scholar', icon: '🎓', desc: 'Win 50 games', check: (s) => s.gamesWon >= 50 },
-            { id: 'wins_100', name: 'Sage', icon: '🧙', desc: 'Win 100 games', check: (s) => s.gamesWon >= 100 },
+            { id: 'first_win', name: 'First Steps', icon: 'ð¯', desc: 'Win your first game', check: (s) => s.gamesWon >= 1 },
+            { id: 'wins_10', name: 'Getting Started', icon: 'ð', desc: 'Win 10 games', check: (s) => s.gamesWon >= 10 },
+            { id: 'wins_50', name: 'Scholar', icon: 'ð', desc: 'Win 50 games', check: (s) => s.gamesWon >= 50 },
+            { id: 'wins_100', name: 'Sage', icon: 'ð§', desc: 'Win 100 games', check: (s) => s.gamesWon >= 100 },
             
             // Streak Achievements
-            { id: 'streak_7', name: 'Week Warrior', icon: '🔥', desc: '7-day streak', check: (s) => s.maxStreak >= 7 },
-            { id: 'streak_30', name: 'Dedicated', icon: '💪', desc: '30-day streak', check: (s) => s.maxStreak >= 30 },
-            { id: 'streak_100', name: 'Legendary', icon: '👑', desc: '100-day streak', check: (s) => s.maxStreak >= 100 },
+            { id: 'streak_7', name: 'Week Warrior', icon: 'ð¥', desc: '7-day streak', check: (s) => s.maxStreak >= 7 },
+            { id: 'streak_30', name: 'Dedicated', icon: 'ðª', desc: '30-day streak', check: (s) => s.maxStreak >= 30 },
+            { id: 'streak_100', name: 'Legendary', icon: 'ð', desc: '100-day streak', check: (s) => s.maxStreak >= 100 },
             
             // Skill Achievements
-            { id: 'first_try', name: 'Bullseye', icon: '🎯', desc: 'Win on first guess', check: (s) => s.guessDistribution[1] >= 1 },
-            { id: 'first_try_5', name: 'Sharpshooter', icon: '🏹', desc: '5 first-guess wins', check: (s) => s.guessDistribution[1] >= 5 },
-            { id: 'hard_mode_10', name: 'Hard Mode Hero', icon: '🦸', desc: '10 hard mode wins', check: (s) => (s.hardModeWins || 0) >= 10 },
+            { id: 'first_try', name: 'Bullseye', icon: 'ð¯', desc: 'Win on first guess', check: (s) => s.guessDistribution[1] >= 1 },
+            { id: 'first_try_5', name: 'Sharpshooter', icon: 'ð¹', desc: '5 first-guess wins', check: (s) => s.guessDistribution[1] >= 5 },
+            { id: 'hard_mode_10', name: 'Hard Mode Hero', icon: 'ð¦¸', desc: '10 hard mode wins', check: (s) => (s.hardModeWins || 0) >= 10 },
             
             // Practice Achievements
-            { id: 'practice_5', name: 'Practice Buff', icon: '📖', desc: 'Win 5 practice games', check: (s, p) => (p?.won || 0) >= 5 },
-            { id: 'practice_25', name: 'Archivist', icon: '🗄️', desc: 'Win 25 practice games', check: (s, p) => (p?.won || 0) >= 25 },
+            { id: 'practice_5', name: 'Practice Buff', icon: 'ð', desc: 'Win 5 practice games', check: (s, p) => (p?.won || 0) >= 5 },
+            { id: 'practice_25', name: 'Archivist', icon: 'ðï¸', desc: 'Win 25 practice games', check: (s, p) => (p?.won || 0) >= 25 },
             
             // Category Mastery Achievements
-            { id: 'lit_5', name: 'Bookworm', icon: '📖', desc: 'Win 5 Literature quotes', check: (s) => (s.categoryWins?.Literature || 0) >= 5 },
-            { id: 'lit_25', name: 'Literary Master', icon: '📚', desc: 'Win 25 Literature quotes', check: (s) => (s.categoryWins?.Literature || 0) >= 25 },
-            { id: 'speech_5', name: 'Orator', icon: '🎤', desc: 'Win 5 Speech quotes', check: (s) => (s.categoryWins?.Speech || 0) >= 5 },
-            { id: 'speech_25', name: 'Rhetorician', icon: '🏛️', desc: 'Win 25 Speech quotes', check: (s) => (s.categoryWins?.Speech || 0) >= 25 },
-            { id: 'phil_5', name: 'Thinker', icon: '🤔', desc: 'Win 5 Philosophy quotes', check: (s) => (s.categoryWins?.Philosophy || 0) >= 5 },
-            { id: 'phil_25', name: 'Philosopher', icon: '🧠', desc: 'Win 25 Philosophy quotes', check: (s) => (s.categoryWins?.Philosophy || 0) >= 25 },
+            { id: 'lit_5', name: 'Bookworm', icon: 'ð', desc: 'Win 5 Literature quotes', check: (s) => (s.categoryWins?.Literature || 0) >= 5 },
+            { id: 'lit_25', name: 'Literary Master', icon: 'ð', desc: 'Win 25 Literature quotes', check: (s) => (s.categoryWins?.Literature || 0) >= 25 },
+            { id: 'speech_5', name: 'Orator', icon: 'ð¤', desc: 'Win 5 Speech quotes', check: (s) => (s.categoryWins?.Speech || 0) >= 5 },
+            { id: 'speech_25', name: 'Rhetorician', icon: 'ðï¸', desc: 'Win 25 Speech quotes', check: (s) => (s.categoryWins?.Speech || 0) >= 25 },
+            { id: 'phil_5', name: 'Thinker', icon: 'ð¤', desc: 'Win 5 Philosophy quotes', check: (s) => (s.categoryWins?.Philosophy || 0) >= 5 },
+            { id: 'phil_25', name: 'Philosopher', icon: 'ð§ ', desc: 'Win 25 Philosophy quotes', check: (s) => (s.categoryWins?.Philosophy || 0) >= 25 },
             
             // Period Mastery Achievements
-            { id: 'ancient_10', name: 'Classicist', icon: '🏺', desc: 'Win 10 Ancient quotes', check: (s) => (s.periodWins?.Ancient || 0) >= 10 },
-            { id: 'modern_10', name: 'Modernist', icon: '🎩', desc: 'Win 10 1900s quotes', check: (s) => (s.periodWins?.['1900s'] || 0) >= 10 },
+            { id: 'ancient_10', name: 'Classicist', icon: 'ðº', desc: 'Win 10 Ancient quotes', check: (s) => (s.periodWins?.Ancient || 0) >= 10 },
+            { id: 'modern_10', name: 'Modernist', icon: 'ð©', desc: 'Win 10 1900s quotes', check: (s) => (s.periodWins?.['1900s'] || 0) >= 10 },
             
             // Token Achievements
-            { id: 'tokens_10', name: 'Collector', icon: '💎', desc: 'Have 10 tokens', check: () => getTokens() >= 10 },
-            { id: 'tokens_25', name: 'Hoarder', icon: '💰', desc: 'Have 25 tokens', check: () => getTokens() >= 25 },
+            { id: 'tokens_10', name: 'Collector', icon: 'ð', desc: 'Have 10 tokens', check: () => getTokens() >= 10 },
+            { id: 'tokens_25', name: 'Hoarder', icon: 'ð°', desc: 'Have 25 tokens', check: () => getTokens() >= 25 },
         ];
         
         function getAchievements() {
@@ -8702,17 +8722,17 @@
             progressSection.innerHTML = `
                 <div class="category-progress">
                     <div class="category-stat">
-                        <div class="category-stat-icon">📚</div>
+                        <div class="category-stat-icon">ð</div>
                         <div class="category-stat-count">${catProgress.Literature}</div>
                         <div class="category-stat-label">Literature</div>
                     </div>
                     <div class="category-stat">
-                        <div class="category-stat-icon">🎤</div>
+                        <div class="category-stat-icon">ð¤</div>
                         <div class="category-stat-count">${catProgress.Speech}</div>
                         <div class="category-stat-label">Speech</div>
                     </div>
                     <div class="category-stat">
-                        <div class="category-stat-icon">🧠</div>
+                        <div class="category-stat-icon">ð§ </div>
                         <div class="category-stat-count">${catProgress.Philosophy}</div>
                         <div class="category-stat-label">Philosophy</div>
                     </div>
@@ -8763,9 +8783,9 @@
         
         // Challenge badge display
         const CATEGORY_INFO = {
-            'Literature': { icon: '📚', color: 'var(--sage)' },
-            'Speech': { icon: '🎤', color: 'var(--burgundy)' },
-            'Philosophy': { icon: '🧠', color: 'var(--gold)' }
+            'Literature': { icon: 'ð', color: 'var(--sage)' },
+            'Speech': { icon: 'ð¤', color: 'var(--burgundy)' },
+            'Philosophy': { icon: 'ð§ ', color: 'var(--gold)' }
         };
         
         function showChallengeBadge(quote) {
@@ -8775,7 +8795,7 @@
             
             if (!badge || !quote) return;
             
-            const catInfo = CATEGORY_INFO[quote.category] || { icon: '📜', color: 'var(--slate)' };
+            const catInfo = CATEGORY_INFO[quote.category] || { icon: 'ð', color: 'var(--slate)' };
             
             icon.textContent = catInfo.icon;
             text.textContent = quote.category;
@@ -8847,7 +8867,7 @@
             if (!toast || !text) return;
             
             const sign = amount >= 0 ? '+' : '';
-            text.textContent = `${sign}${amount} 💎 ${reason || 'Token' + (Math.abs(amount) !== 1 ? 's' : '')}`;
+            text.textContent = `${sign}${amount} ð ${reason || 'Token' + (Math.abs(amount) !== 1 ? 's' : '')}`;
             
             toast.classList.add('show');
             setTimeout(() => {
@@ -8888,9 +8908,9 @@
             
             if (hintSection.style.display === 'none') {
                 hintSection.style.display = 'block';
-                hintText.innerHTML = `🔤 <strong>First letter:</strong> "${firstLetter}"`;
+                hintText.innerHTML = `ð¤ <strong>First letter:</strong> "${firstLetter}"`;
             } else {
-                hintText.innerHTML += `<br>🔤 <strong>First letter:</strong> "${firstLetter}"`;
+                hintText.innerHTML += `<br>ð¤ <strong>First letter:</strong> "${firstLetter}"`;
             }
             
             updateHintButtons();
@@ -8926,9 +8946,9 @@
             
             if (hintSection.style.display === 'none') {
                 hintSection.style.display = 'block';
-                hintText.innerHTML = `👥 <strong>It's one of these:</strong> ${listHtml}`;
+                hintText.innerHTML = `ð¥ <strong>It's one of these:</strong> ${listHtml}`;
             } else {
-                hintText.innerHTML += `<br>👥 <strong>It's one of these:</strong> ${listHtml}`;
+                hintText.innerHTML += `<br>ð¥ <strong>It's one of these:</strong> ${listHtml}`;
             }
             
             // Refresh autocomplete dropdown
@@ -9361,11 +9381,11 @@
                     </div>
                     <div class="stat-box" style="padding: 12px 8px; border-radius: 10px;">
                         <div style="font-size: 1.75rem; font-weight: bold; color: var(--gold);">${stats.currentStreak}</div>
-                        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--slate); margin-top: 2px;">🔥 Streak</div>
+                        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--slate); margin-top: 2px;">ð¥ Streak</div>
                     </div>
                     <div class="stat-box" style="padding: 12px 8px; border-radius: 10px;">
                         <div style="font-size: 1.75rem; font-weight: bold; color: var(--slate);">${stats.maxStreak}</div>
-                        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--slate); margin-top: 2px;">🏆 Best</div>
+                        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--slate); margin-top: 2px;">ð Best</div>
                     </div>
                 </div>
                 
@@ -9910,7 +9930,7 @@
             
             gameOverScreen.innerHTML = `
                 <div class="game-over">
-                    <h2>${todayResult.won ? '✅ Completed!' : '❌ Already Played'}</h2>
+                    <h2>${todayResult.won ? 'â Completed!' : 'â Already Played'}</h2>
                     <p style="margin-bottom: 20px;">You ${todayResult.won ? 'solved' : 'attempted'} today's quote ${todayResult.won ? `in ${todayResult.attempts} ${todayResult.attempts === 1 ? 'guess' : 'guesses'}` : ''}</p>
                     
                     <div class="reveal">
@@ -9970,11 +9990,11 @@
             let grid = '';
             for (let i = 0; i < 4; i++) {
                 if (i < attempts - 1) {
-                    grid += '🟥'; // Wrong guesses
+                    grid += 'ð¥'; // Wrong guesses
                 } else if (i === attempts - 1) {
-                    grid += won ? '🟩' : '🟥'; // Final guess
+                    grid += won ? 'ð©' : 'ð¥'; // Final guess
                 } else {
-                    grid += '⬜'; // Unused
+                    grid += 'â¬'; // Unused
                 }
             }
             
@@ -9984,29 +10004,29 @@
                 scoreLine = `${attempts}/4`;
             } else if (gaveUp) {
                 const actualGuesses = guesses.filter(g => !g.gaveUp).length;
-                scoreLine = `🏳️ ${actualGuesses}/4`;
+                scoreLine = `ð³ï¸ ${actualGuesses}/4`;
             } else {
                 scoreLine = 'X/4';
             }
             
             // Result emoji
-            let resultEmoji = '❌';
+            let resultEmoji = 'â';
             if (won) {
-                resultEmoji = attempts === 1 ? '🎯' : '✅';
+                resultEmoji = attempts === 1 ? 'ð¯' : 'â';
             } else if (gaveUp) {
-                resultEmoji = '🏳️';
+                resultEmoji = 'ð³ï¸';
             }
             
             // Mode info
-            const modeEmoji = gameDifficulty === 'hard' ? '💪' : '📖';
+            const modeEmoji = gameDifficulty === 'hard' ? 'ðª' : 'ð';
             const modeLabel = gameDifficulty === 'hard' ? 'Hard' : 'Easy';
             
             // Build share text
-            let shareText = `💬 Quotle #${quoteNumber} ${resultEmoji}\n${scoreLine} ${grid}`;
+            let shareText = `ð¬ Quotle #${quoteNumber} ${resultEmoji}\n${scoreLine} ${grid}`;
             shareText += `\nDifficulty: ${currentQuote.difficulty}/10`;
             shareText += `\n${modeEmoji} ${modeLabel} Mode`;
             if (stats && stats.currentStreak > 1) {
-                shareText += ` · 🔥${stats.currentStreak}`;
+                shareText += ` Â· ð¥${stats.currentStreak}`;
             }
             shareText += '\n\nhttps://quotle.game';
             
@@ -10039,7 +10059,7 @@
                 }
             });
             
-            console.log('🎮 Quotle result reported to Game Shelf');
+            console.log('ð® Quotle result reported to Game Shelf');
         }
         
         function shareResults() {
@@ -10062,53 +10082,53 @@
                 // Add attempt squares
                 for (let i = 0; i < 4; i++) {
                     if (i < attempts - 1) {
-                        resultText += '🟥'; // Wrong guesses
+                        resultText += 'ð¥'; // Wrong guesses
                     } else if (i === attempts - 1) {
-                        resultText += '🟩'; // Correct guess
+                        resultText += 'ð©'; // Correct guess
                     } else {
-                        resultText += '⬜'; // Unused attempts
+                        resultText += 'â¬'; // Unused attempts
                     }
                 }
                 resultText += `\n\nDifficulty: ${currentQuote.difficulty}/10 `;
                 
                 // Add difficulty indicator
                 if (currentQuote.difficulty <= 5) {
-                    resultText += '🟢';
+                    resultText += 'ð¢';
                 } else if (currentQuote.difficulty <= 7) {
-                    resultText += '🟡';
+                    resultText += 'ð¡';
                 } else {
-                    resultText += '🔴';
+                    resultText += 'ð´';
                 }
                 
                 // Add streak for daily mode wins (only if not in plain mode)
                 if (!isPracticeMode && !plainMode) {
                     const stats = getStats();
                     if (stats.currentStreak > 1) {
-                        resultText += `\n🔥 ${stats.currentStreak} day streak`;
+                        resultText += `\nð¥ ${stats.currentStreak} day streak`;
                     }
                 }
             } else {
                 if (gaveUp && !plainMode) {
                     // Count actual guesses made before giving up
                     const actualGuesses = guesses.filter(g => !g.gaveUp).length;
-                    resultText += `🏳️ ${actualGuesses}/4 `;
+                    resultText += `ð³ï¸ ${actualGuesses}/4 `;
                     // Show squares for actual guesses plus white flags for skipped
                     for (let i = 0; i < actualGuesses; i++) {
-                        resultText += '🟥';
+                        resultText += 'ð¥';
                     }
                     for (let i = actualGuesses; i < 4; i++) {
-                        resultText += '⬜';
+                        resultText += 'â¬';
                     }
                 } else {
                     resultText += 'X/4 ';
-                    resultText += '🟥🟥🟥🟥';
+                    resultText += 'ð¥ð¥ð¥ð¥';
                 }
                 resultText += `\n\nDifficulty: ${currentQuote.difficulty}/10`;
             }
             
             // Add mode indicator (only if not in plain mode)
             if (!plainMode) {
-                const modeEmoji = gameDifficulty === 'hard' ? '💪' : '📖';
+                const modeEmoji = gameDifficulty === 'hard' ? 'ðª' : 'ð';
                 resultText += `\n${modeEmoji} ${gameDifficulty === 'hard' ? 'Hard' : 'Easy'} Mode`;
             }
             
@@ -10229,7 +10249,7 @@
             
             // Show special message
             setTimeout(() => {
-                showShareConfirmation('🎯 PERFECT! First Try! 🎯');
+                showShareConfirmation('ð¯ PERFECT! First Try! ð¯');
             }, 500);
         }
         
@@ -10250,7 +10270,7 @@
                 </div>
                 <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1);">
                     <small style="color: var(--slate); font-size: 0.8rem;">
-                        💡 Historical context &bull; <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(currentQuote.author.replace(/ /g, '_'))}" target="_blank" rel="noopener noreferrer" style="color: var(--burgundy);">Learn more on Wikipedia →</a>
+                        ð¡ Historical context &bull; <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(currentQuote.author.replace(/ /g, '_'))}" target="_blank" rel="noopener noreferrer" style="color: var(--burgundy);">Learn more on Wikipedia â</a>
                     </small>
                 </div>
             `;
@@ -10262,11 +10282,11 @@
             // Generate contextual information based on author, period, and category
             const contexts = {
                 // Ancient philosophers
-                'Socrates': `Socrates (469-399 BCE) lived during Athens' Golden Age, a period of unprecedented cultural and intellectual flourishing following victory in the Persian Wars. His method of questioning assumptions challenged the traditional education system and threatened powerful citizens who preferred conformity.\n\nThis quote came from his trial in 399 BCE, where he was accused of corrupting the youth and impiety. Rather than flee or compromise his principles, Socrates chose to drink hemlock, believing it was better to die true to his philosophy than to live in contradiction. His execution became one of history's most famous martyrdoms for intellectual freedom.\n\nSocrates' influence shaped Western philosophy through his student Plato, who recorded his teachings. The Socratic method—questioning to expose contradictions and arrive at truth—remains fundamental to education, law, and critical thinking today.`,
+                'Socrates': `Socrates (469-399 BCE) lived during Athens' Golden Age, a period of unprecedented cultural and intellectual flourishing following victory in the Persian Wars. His method of questioning assumptions challenged the traditional education system and threatened powerful citizens who preferred conformity.\n\nThis quote came from his trial in 399 BCE, where he was accused of corrupting the youth and impiety. Rather than flee or compromise his principles, Socrates chose to drink hemlock, believing it was better to die true to his philosophy than to live in contradiction. His execution became one of history's most famous martyrdoms for intellectual freedom.\n\nSocrates' influence shaped Western philosophy through his student Plato, who recorded his teachings. The Socratic methodâquestioning to expose contradictions and arrive at truthâremains fundamental to education, law, and critical thinking today.`,
                 
-                'Plato': `Plato (428-348 BCE) founded the Academy in Athens around 387 BCE, one of the first institutions of higher learning in the Western world. He lived through Athens' defeat in the Peloponnesian War and witnessed the execution of his teacher Socrates, events that profoundly shaped his political philosophy.\n\nHis works explored justice, governance, and the nature of reality through dialectic dialogues. Plato's "Theory of Forms" argued that the material world is merely a shadow of a higher, eternal realm of perfect ideas—a concept that influenced Christianity and Western metaphysics for millennia.\n\nThe Academy lasted nearly 900 years, producing thinkers who shaped mathematics, astronomy, and philosophy. Plato's ideas about ideal societies, education, and truth continue to spark debate and inspire political theory today.`,
+                'Plato': `Plato (428-348 BCE) founded the Academy in Athens around 387 BCE, one of the first institutions of higher learning in the Western world. He lived through Athens' defeat in the Peloponnesian War and witnessed the execution of his teacher Socrates, events that profoundly shaped his political philosophy.\n\nHis works explored justice, governance, and the nature of reality through dialectic dialogues. Plato's "Theory of Forms" argued that the material world is merely a shadow of a higher, eternal realm of perfect ideasâa concept that influenced Christianity and Western metaphysics for millennia.\n\nThe Academy lasted nearly 900 years, producing thinkers who shaped mathematics, astronomy, and philosophy. Plato's ideas about ideal societies, education, and truth continue to spark debate and inspire political theory today.`,
                 
-                'Aristotle': `Aristotle (384-322 BCE) studied under Plato for 20 years before founding his own school, the Lyceum, in Athens. He later served as tutor to Alexander the Great, whose conquests would spread Greek culture across the known world, creating the Hellenistic Age.\n\nUnlike Plato's focus on abstract ideals, Aristotle emphasized empirical observation and classification, essentially inventing the scientific method. His works covered biology, physics, ethics, politics, logic, and metaphysics—systematizing human knowledge in ways that dominated Western thought for over 2,000 years.\n\nHis influence on medieval Islamic and Christian scholarship was immense. Thomas Aquinas synthesized Aristotelian philosophy with Christian theology, while Islamic scholars preserved and expanded his scientific works during Europe's Dark Ages.`,
+                'Aristotle': `Aristotle (384-322 BCE) studied under Plato for 20 years before founding his own school, the Lyceum, in Athens. He later served as tutor to Alexander the Great, whose conquests would spread Greek culture across the known world, creating the Hellenistic Age.\n\nUnlike Plato's focus on abstract ideals, Aristotle emphasized empirical observation and classification, essentially inventing the scientific method. His works covered biology, physics, ethics, politics, logic, and metaphysicsâsystematizing human knowledge in ways that dominated Western thought for over 2,000 years.\n\nHis influence on medieval Islamic and Christian scholarship was immense. Thomas Aquinas synthesized Aristotelian philosophy with Christian theology, while Islamic scholars preserved and expanded his scientific works during Europe's Dark Ages.`,
                 
                 'Marcus Aurelius': `Marcus Aurelius (121-180 CE) ruled Rome during its height but faced constant warfare, plague, and political intrigue. His "Meditations" were private journals never intended for publication, making them remarkably honest reflections on Stoic philosophy and leadership under pressure.\n\nHe wrote while commanding armies on Rome's northern frontiers, dealing with Germanic invasions and a devastating plague that killed millions. Despite these crises, he's remembered as one of the "Five Good Emperors" who prioritized duty, reason, and virtue over personal gain.\n\nHis Stoic philosophy emphasized accepting what you cannot control while focusing on your own character and actions. This ancient wisdom has found new relevance today in cognitive behavioral therapy and modern self-help movements.`,
                 
@@ -10275,9 +10295,9 @@
                 'Lao Tzu': `Lao Tzu (6th century BCE) is a semi-legendary figure credited with founding Taoism and writing the Tao Te Ching during China's tumultuous Spring and Autumn period. Legend says he was a contemporary of Confucius, representing an alternative philosophical tradition emphasizing naturalness and spontaneity.\n\nTaoism taught harmony with the Tao ("the Way"), embracing simplicity, non-action (wu wei), and accepting natural cycles. This stood in contrast to Confucian emphasis on social order and ritual, offering a complementary balance in Chinese thought.\n\nTaoist ideas influenced Chinese medicine, martial arts, art, and poetry. The concept of yin and yang, balancing opposing forces, became fundamental to Chinese cosmology. Taoism's ecological wisdom and emphasis on flow over force resonates strongly with modern environmental and mindfulness movements.`,
                 
                 // Roman thinkers
-                'Seneca': `Seneca (4 BCE-65 CE) was a Stoic philosopher, statesman, and dramatist who served as advisor to Emperor Nero. His letters and essays on ethics, anger, grief, and the shortness of life remain some of the most accessible introductions to Stoic philosophy.\n\nHis political career was turbulent—he was exiled to Corsica for eight years, recalled to tutor the young Nero, and eventually forced to commit suicide when accused of conspiracy. Throughout, he wrote extensively on how to live well amid chaos and uncertainty.\n\nSeneca's practical wisdom on managing emotions, facing mortality, and finding meaning influenced Renaissance humanism and continues to resonate in modern self-help and cognitive therapy. His concept of "premeditatio malorum" (negative visualization) is now used in psychology.`,
+                'Seneca': `Seneca (4 BCE-65 CE) was a Stoic philosopher, statesman, and dramatist who served as advisor to Emperor Nero. His letters and essays on ethics, anger, grief, and the shortness of life remain some of the most accessible introductions to Stoic philosophy.\n\nHis political career was turbulentâhe was exiled to Corsica for eight years, recalled to tutor the young Nero, and eventually forced to commit suicide when accused of conspiracy. Throughout, he wrote extensively on how to live well amid chaos and uncertainty.\n\nSeneca's practical wisdom on managing emotions, facing mortality, and finding meaning influenced Renaissance humanism and continues to resonate in modern self-help and cognitive therapy. His concept of "premeditatio malorum" (negative visualization) is now used in psychology.`,
                 
-                'Epictetus': `Epictetus (50-135 CE) was born a slave in the Roman Empire and later freed, becoming one of the most influential Stoic philosophers. His teachings, recorded by his student Arrian in the "Discourses" and "Enchiridion," emphasize that we control only our own thoughts and actions—everything else is external.\n\nHis philosophy emerged from direct experience of powerlessness. As a slave, he learned that inner freedom was the only freedom that couldn't be taken away. This insight became central to Stoicism's enduring appeal.\n\nEpictetus influenced Marcus Aurelius, early Christianity, and modern cognitive behavioral therapy. His famous dichotomy of control—distinguishing what we can and cannot change—remains a powerful framework for resilience and mental health.`,
+                'Epictetus': `Epictetus (50-135 CE) was born a slave in the Roman Empire and later freed, becoming one of the most influential Stoic philosophers. His teachings, recorded by his student Arrian in the "Discourses" and "Enchiridion," emphasize that we control only our own thoughts and actionsâeverything else is external.\n\nHis philosophy emerged from direct experience of powerlessness. As a slave, he learned that inner freedom was the only freedom that couldn't be taken away. This insight became central to Stoicism's enduring appeal.\n\nEpictetus influenced Marcus Aurelius, early Christianity, and modern cognitive behavioral therapy. His famous dichotomy of controlâdistinguishing what we can and cannot changeâremains a powerful framework for resilience and mental health.`,
                 
                 'Cicero': `Cicero (106-43 BCE) was Rome's greatest orator, a philosopher, and statesman who witnessed the fall of the Roman Republic. His writings preserved Greek philosophy for the Western world and established Latin as a philosophical language.\n\nHe navigated the dangerous politics of Caesar, Pompey, and Mark Antony, ultimately paying with his life when his speeches against Antony led to his assassination. His letters provide an intimate portrait of Roman political life.\n\nCicero's works on rhetoric, ethics, and political philosophy influenced the Renaissance, the Enlightenment, and the American Founding Fathers. John Adams and Thomas Jefferson cited him as essential reading for understanding republican government.`,
                 
@@ -10286,70 +10306,70 @@
                 
                 'Dante Alighieri': `Dante Alighieri (1265-1321) wrote the Divine Comedy, considered the greatest work of Italian literature and a masterpiece of world poetry. Exiled from his beloved Florence for political reasons, he wandered Italy, writing his epic journey through Hell, Purgatory, and Paradise.\n\nThe Divine Comedy synthesized medieval theology, classical philosophy, and personal vendetta into an allegory of the soul's journey to God. Dante populated Hell with his political enemies and Paradise with his idealized beloved, Beatrice.\n\nDante established Tuscan as the literary language of Italy, earning him the title "Father of the Italian language." His vivid imagery of the afterlife shaped Western conceptions of Heaven and Hell for centuries.`,
                 
-                'Leonardo da Vinci': `Leonardo da Vinci (1452-1519) epitomized the Renaissance ideal of the "universal man"—painter, sculptor, architect, musician, mathematician, engineer, inventor, anatomist, and writer. His curiosity was boundless, his notebooks filled with observations and inventions centuries ahead of his time.\n\nWhile famous for the Mona Lisa and The Last Supper, Leonardo considered painting just one of many pursuits. He dissected corpses to understand anatomy, designed flying machines, and studied water flow, light, and geology with scientific rigor.\n\nLeonardo's notebooks reveal a mind constantly questioning and experimenting. His approach—combining art with science, observation with imagination—anticipated the scientific method and continues to inspire innovators and artists alike.`,
+                'Leonardo da Vinci': `Leonardo da Vinci (1452-1519) epitomized the Renaissance ideal of the "universal man"âpainter, sculptor, architect, musician, mathematician, engineer, inventor, anatomist, and writer. His curiosity was boundless, his notebooks filled with observations and inventions centuries ahead of his time.\n\nWhile famous for the Mona Lisa and The Last Supper, Leonardo considered painting just one of many pursuits. He dissected corpses to understand anatomy, designed flying machines, and studied water flow, light, and geology with scientific rigor.\n\nLeonardo's notebooks reveal a mind constantly questioning and experimenting. His approachâcombining art with science, observation with imaginationâanticipated the scientific method and continues to inspire innovators and artists alike.`,
                 
-                'Niccolò Machiavelli': `Niccolò Machiavelli (1469-1527) was a Florentine diplomat and political philosopher whose treatise "The Prince" shocked readers by separating politics from morality. Writing during Italy's devastating wars and foreign invasions, he sought to understand power as it actually worked, not as it should work.\n\nHis career ended when the Medici family returned to power and imprisoned him on suspicion of conspiracy. In forced retirement, he wrote his major works, including "The Prince" and "Discourses on Livy."\n\nMachiavelli's realistic analysis of power, often misunderstood as advocating cruelty, actually sought to minimize violence through effective statecraft. His insights into human nature and political strategy remain studied in political science, business, and military academies worldwide.`,
+                'NiccolÃ² Machiavelli': `NiccolÃ² Machiavelli (1469-1527) was a Florentine diplomat and political philosopher whose treatise "The Prince" shocked readers by separating politics from morality. Writing during Italy's devastating wars and foreign invasions, he sought to understand power as it actually worked, not as it should work.\n\nHis career ended when the Medici family returned to power and imprisoned him on suspicion of conspiracy. In forced retirement, he wrote his major works, including "The Prince" and "Discourses on Livy."\n\nMachiavelli's realistic analysis of power, often misunderstood as advocating cruelty, actually sought to minimize violence through effective statecraft. His insights into human nature and political strategy remain studied in political science, business, and military academies worldwide.`,
                 
-                'Michel de Montaigne': `Michel de Montaigne (1533-1592) invented the personal essay as a literary form, using writing as a tool for self-examination during France's brutal Wars of Religion. Retiring to his château's tower library, he asked "What do I know?" and spent decades exploring the question.\n\nHis "Essays" range from the profound to the mundane—death, friendship, cannibals, thumbs—always returning to the central subject: himself as a representative human being. His radical honesty about his own contradictions and limitations was revolutionary.\n\nMontaigne's skepticism, tolerance, and humanism influenced Shakespeare, Descartes, Rousseau, and Nietzsche. His conversational style and personal voice created the template for the essay form that bloggers and columnists still follow today.`,
+                'Michel de Montaigne': `Michel de Montaigne (1533-1592) invented the personal essay as a literary form, using writing as a tool for self-examination during France's brutal Wars of Religion. Retiring to his chÃ¢teau's tower library, he asked "What do I know?" and spent decades exploring the question.\n\nHis "Essays" range from the profound to the mundaneâdeath, friendship, cannibals, thumbsâalways returning to the central subject: himself as a representative human being. His radical honesty about his own contradictions and limitations was revolutionary.\n\nMontaigne's skepticism, tolerance, and humanism influenced Shakespeare, Descartes, Rousseau, and Nietzsche. His conversational style and personal voice created the template for the essay form that bloggers and columnists still follow today.`,
                 
                 // Enlightenment thinkers
-                'Voltaire': `Voltaire (1694-1778) was the pen name of François-Marie Arouet, the Enlightenment's most famous advocate for civil liberties, religious tolerance, and free speech. His wit and prolific output—plays, poems, novels, essays, and thousands of letters—made him the intellectual celebrity of his age.\n\nRepeatedly imprisoned and exiled for his satirical attacks on the French aristocracy and Catholic Church, he spent years in England, Prussia, and Switzerland. His novel "Candide" satirized optimistic philosophy amid the horrors of war and natural disaster.\n\nVoltaire's defense of victims of religious persecution and his attacks on superstition helped shape modern secular society. His quote "I disapprove of what you say, but I will defend to the death your right to say it" (actually written by his biographer) captures his legacy.`,
+                'Voltaire': `Voltaire (1694-1778) was the pen name of FranÃ§ois-Marie Arouet, the Enlightenment's most famous advocate for civil liberties, religious tolerance, and free speech. His wit and prolific outputâplays, poems, novels, essays, and thousands of lettersâmade him the intellectual celebrity of his age.\n\nRepeatedly imprisoned and exiled for his satirical attacks on the French aristocracy and Catholic Church, he spent years in England, Prussia, and Switzerland. His novel "Candide" satirized optimistic philosophy amid the horrors of war and natural disaster.\n\nVoltaire's defense of victims of religious persecution and his attacks on superstition helped shape modern secular society. His quote "I disapprove of what you say, but I will defend to the death your right to say it" (actually written by his biographer) captures his legacy.`,
                 
-                'Jean-Jacques Rousseau': `Jean-Jacques Rousseau (1712-1778) was a Genevan philosopher whose ideas on education, democracy, and human nature profoundly influenced the French Revolution and Romantic movement. His famous opening line "Man is born free, and everywhere he is in chains" challenged the legitimacy of social inequality.\n\nHis life was marked by contradictions—a writer on education who abandoned his five children to foundling homes, a champion of virtue plagued by paranoia and broken friendships. Yet his radical ideas about democracy, childhood development, and authentic selfhood changed Western thought.\n\nRousseau's "Social Contract" influenced the French Revolution's ideals, while his educational philosophy in "Emile" shaped progressive education. His autobiographical "Confessions" pioneered the modern memoir's honest self-examination.`,
+                'Jean-Jacques Rousseau': `Jean-Jacques Rousseau (1712-1778) was a Genevan philosopher whose ideas on education, democracy, and human nature profoundly influenced the French Revolution and Romantic movement. His famous opening line "Man is born free, and everywhere he is in chains" challenged the legitimacy of social inequality.\n\nHis life was marked by contradictionsâa writer on education who abandoned his five children to foundling homes, a champion of virtue plagued by paranoia and broken friendships. Yet his radical ideas about democracy, childhood development, and authentic selfhood changed Western thought.\n\nRousseau's "Social Contract" influenced the French Revolution's ideals, while his educational philosophy in "Emile" shaped progressive education. His autobiographical "Confessions" pioneered the modern memoir's honest self-examination.`,
                 
-                'Benjamin Franklin': `Benjamin Franklin (1706-1790) rose from humble Boston beginnings to become America's first international celebrity—printer, scientist, inventor, diplomat, and Founding Father. His experiments with electricity, invention of bifocals and the Franklin stove, and role in securing French support for the American Revolution made him a legend in his own time.\n\nHis "Poor Richard's Almanack" spread practical wisdom through memorable aphorisms, while his Autobiography became a template for the American success story. As a diplomat in France, his simple style and wit charmed Parisian society.\n\nFranklin embodied the Enlightenment ideal of the self-made man who improves both himself and society through reason, hard work, and civic engagement. His influence on American identity—practical, inventive, democratic—remains profound.`,
+                'Benjamin Franklin': `Benjamin Franklin (1706-1790) rose from humble Boston beginnings to become America's first international celebrityâprinter, scientist, inventor, diplomat, and Founding Father. His experiments with electricity, invention of bifocals and the Franklin stove, and role in securing French support for the American Revolution made him a legend in his own time.\n\nHis "Poor Richard's Almanack" spread practical wisdom through memorable aphorisms, while his Autobiography became a template for the American success story. As a diplomat in France, his simple style and wit charmed Parisian society.\n\nFranklin embodied the Enlightenment ideal of the self-made man who improves both himself and society through reason, hard work, and civic engagement. His influence on American identityâpractical, inventive, democraticâremains profound.`,
                 
-                'Thomas Jefferson': `Thomas Jefferson (1743-1826) authored the Declaration of Independence, served as the third U.S. President, and founded the University of Virginia. A polymath who corresponded with scientists, philosophers, and politicians across the Atlantic, he embodied Enlightenment ideals of reason and progress.\n\nHis contradictions were profound—the author of "all men are created equal" who enslaved over 600 people throughout his lifetime. These contradictions reflected and shaped America's ongoing struggle with its founding ideals.\n\nJefferson's vision of an agrarian democracy of educated citizens, his advocacy for religious freedom, and his belief in public education continue to influence American political thought, even as historians grapple with the full complexity of his legacy.`,
+                'Thomas Jefferson': `Thomas Jefferson (1743-1826) authored the Declaration of Independence, served as the third U.S. President, and founded the University of Virginia. A polymath who corresponded with scientists, philosophers, and politicians across the Atlantic, he embodied Enlightenment ideals of reason and progress.\n\nHis contradictions were profoundâthe author of "all men are created equal" who enslaved over 600 people throughout his lifetime. These contradictions reflected and shaped America's ongoing struggle with its founding ideals.\n\nJefferson's vision of an agrarian democracy of educated citizens, his advocacy for religious freedom, and his belief in public education continue to influence American political thought, even as historians grapple with the full complexity of his legacy.`,
                 
-                'Immanuel Kant': `Immanuel Kant (1724-1804) never traveled more than 100 miles from his hometown of Königsberg, yet his philosophical revolution transformed Western thought. His "Critique of Pure Reason" attempted to reconcile rationalism and empiricism, while his moral philosophy grounded ethics in reason alone.\n\nHis famous categorical imperative—act only according to rules you could will to be universal laws—provided a secular foundation for morality. His work on aesthetics, politics, and religion was equally influential.\n\nKant's philosophy shaped virtually every subsequent philosophical movement, from German Idealism to contemporary ethics. His ideas on human rights, international law, and perpetual peace influenced the United Nations and modern human rights frameworks.`,
+                'Immanuel Kant': `Immanuel Kant (1724-1804) never traveled more than 100 miles from his hometown of KÃ¶nigsberg, yet his philosophical revolution transformed Western thought. His "Critique of Pure Reason" attempted to reconcile rationalism and empiricism, while his moral philosophy grounded ethics in reason alone.\n\nHis famous categorical imperativeâact only according to rules you could will to be universal lawsâprovided a secular foundation for morality. His work on aesthetics, politics, and religion was equally influential.\n\nKant's philosophy shaped virtually every subsequent philosophical movement, from German Idealism to contemporary ethics. His ideas on human rights, international law, and perpetual peace influenced the United Nations and modern human rights frameworks.`,
                 
                 // 19th Century writers
-                'Ralph Waldo Emerson': `Ralph Waldo Emerson (1803-1882) led the Transcendentalist movement, advocating self-reliance, intuition, and communion with nature as paths to spiritual truth. After leaving the Unitarian ministry, he became America's leading public intellectual through essays and lectures.\n\nHis Concord home became a gathering place for reformers, writers, and thinkers including Thoreau, Fuller, and Hawthorne. His essay "Self-Reliance" articulated an American philosophy of individualism and nonconformity.\n\nEmerson's influence on American culture is immeasurable—from Whitman's poetry to the self-help movement, from environmentalism to Silicon Valley's celebration of innovation and disruption. His call to trust oneself and think independently remains central to American identity.`,
+                'Ralph Waldo Emerson': `Ralph Waldo Emerson (1803-1882) led the Transcendentalist movement, advocating self-reliance, intuition, and communion with nature as paths to spiritual truth. After leaving the Unitarian ministry, he became America's leading public intellectual through essays and lectures.\n\nHis Concord home became a gathering place for reformers, writers, and thinkers including Thoreau, Fuller, and Hawthorne. His essay "Self-Reliance" articulated an American philosophy of individualism and nonconformity.\n\nEmerson's influence on American culture is immeasurableâfrom Whitman's poetry to the self-help movement, from environmentalism to Silicon Valley's celebration of innovation and disruption. His call to trust oneself and think independently remains central to American identity.`,
                 
-                'Henry David Thoreau': `Henry David Thoreau (1817-1862) lived for two years in a cabin he built at Walden Pond, an experiment in simple living that produced one of America's most influential books. His essay "Civil Disobedience," written after a night in jail for refusing to pay taxes supporting slavery and the Mexican War, inspired Gandhi and Martin Luther King Jr.\n\nThough often portrayed as a hermit, Thoreau was deeply engaged with the abolition movement and walked to Concord village regularly. His detailed nature observations anticipated ecology, while his social criticism challenged American materialism.\n\nThoreau's influence grows with each generation—environmentalists, minimalists, and political activists continue to find inspiration in his radical questioning of how we should live and what we owe to unjust governments.`,
+                'Henry David Thoreau': `Henry David Thoreau (1817-1862) lived for two years in a cabin he built at Walden Pond, an experiment in simple living that produced one of America's most influential books. His essay "Civil Disobedience," written after a night in jail for refusing to pay taxes supporting slavery and the Mexican War, inspired Gandhi and Martin Luther King Jr.\n\nThough often portrayed as a hermit, Thoreau was deeply engaged with the abolition movement and walked to Concord village regularly. His detailed nature observations anticipated ecology, while his social criticism challenged American materialism.\n\nThoreau's influence grows with each generationâenvironmentalists, minimalists, and political activists continue to find inspiration in his radical questioning of how we should live and what we owe to unjust governments.`,
                 
-                'Mark Twain': `Mark Twain (1835-1910), born Samuel Clemens, became America's most beloved writer through his humor, storytelling, and biting social criticism. Growing up along the Mississippi River and working as a steamboat pilot shaped his masterpiece, "Adventures of Huckleberry Finn."\n\nHis humor masked serious engagement with American hypocrisy—racism, imperialism, religious fraud, and political corruption were constant targets. Personal tragedies, including the deaths of his wife and three of four children, darkened his later years.\n\nTwain's influence on American literature is foundational. Hemingway claimed "All modern American literature comes from one book by Mark Twain called Huckleberry Finn." His authentic American voice, capturing vernacular speech and frontier humor, freed subsequent writers from European literary conventions.`,
+                'Mark Twain': `Mark Twain (1835-1910), born Samuel Clemens, became America's most beloved writer through his humor, storytelling, and biting social criticism. Growing up along the Mississippi River and working as a steamboat pilot shaped his masterpiece, "Adventures of Huckleberry Finn."\n\nHis humor masked serious engagement with American hypocrisyâracism, imperialism, religious fraud, and political corruption were constant targets. Personal tragedies, including the deaths of his wife and three of four children, darkened his later years.\n\nTwain's influence on American literature is foundational. Hemingway claimed "All modern American literature comes from one book by Mark Twain called Huckleberry Finn." His authentic American voice, capturing vernacular speech and frontier humor, freed subsequent writers from European literary conventions.`,
                 
-                'Oscar Wilde': `Oscar Wilde (1854-1900) was the most celebrated wit of Victorian England, whose plays, poems, and single novel "The Picture of Dorian Gray" made him a literary celebrity. His flamboyant personality and aesthetic philosophy—"art for art's sake"—challenged Victorian earnestness.\n\nAt the height of his fame, he was convicted of "gross indecency" for his homosexual relationships and sentenced to two years of hard labor. Prison broke his health; he died in Paris at 46, three years after release.\n\nWilde's wit remains endlessly quotable, but his life also represents the tragedy of genius destroyed by prejudice. His prison letter "De Profundis" and poem "The Ballad of Reading Gaol" reveal depths beyond the sparkling surface of his comedies.`,
+                'Oscar Wilde': `Oscar Wilde (1854-1900) was the most celebrated wit of Victorian England, whose plays, poems, and single novel "The Picture of Dorian Gray" made him a literary celebrity. His flamboyant personality and aesthetic philosophyâ"art for art's sake"âchallenged Victorian earnestness.\n\nAt the height of his fame, he was convicted of "gross indecency" for his homosexual relationships and sentenced to two years of hard labor. Prison broke his health; he died in Paris at 46, three years after release.\n\nWilde's wit remains endlessly quotable, but his life also represents the tragedy of genius destroyed by prejudice. His prison letter "De Profundis" and poem "The Ballad of Reading Gaol" reveal depths beyond the sparkling surface of his comedies.`,
                 
-                'Fyodor Dostoevsky': `Fyodor Dostoevsky (1821-1881) explored the darkest corners of the human psyche in novels that predicted existentialism and modern psychology. Arrested for revolutionary activities, he faced a mock execution before being sent to a Siberian labor camp—an experience that transformed his worldview.\n\nHis major novels—"Crime and Punishment," "The Idiot," "Demons," and "The Brothers Karamazov"—probe guilt, faith, freedom, and the existence of God with unprecedented psychological depth. His characters wrestle with ideas that drive them to extremes.\n\nDostoevsky influenced Nietzsche, Freud, Kafka, and existentialist philosophy. His exploration of the underground man, the psychology of crime, and the conflict between reason and faith remains startlingly relevant to modern anxieties.`,
+                'Fyodor Dostoevsky': `Fyodor Dostoevsky (1821-1881) explored the darkest corners of the human psyche in novels that predicted existentialism and modern psychology. Arrested for revolutionary activities, he faced a mock execution before being sent to a Siberian labor campâan experience that transformed his worldview.\n\nHis major novelsâ"Crime and Punishment," "The Idiot," "Demons," and "The Brothers Karamazov"âprobe guilt, faith, freedom, and the existence of God with unprecedented psychological depth. His characters wrestle with ideas that drive them to extremes.\n\nDostoevsky influenced Nietzsche, Freud, Kafka, and existentialist philosophy. His exploration of the underground man, the psychology of crime, and the conflict between reason and faith remains startlingly relevant to modern anxieties.`,
                 
-                'Leo Tolstoy': `Leo Tolstoy (1828-1910) wrote two of the greatest novels ever written—"War and Peace" and "Anna Karenina"—before undergoing a spiritual crisis that led him to renounce his literary work and aristocratic lifestyle. His later writings on nonviolent resistance influenced Gandhi and Martin Luther King Jr.\n\nBorn into Russian nobility, Tolstoy fought in the Crimean War, married, had thirteen children, and managed a vast estate—all while producing literature of unparalleled scope and psychological insight.\n\nTolstoy's late philosophy—rejecting church, state, and private property in favor of simple Christian ethics—made him a spiritual leader to thousands who pilgrimaged to his estate. His influence spans literature, pacifism, and movements for social justice.`,
+                'Leo Tolstoy': `Leo Tolstoy (1828-1910) wrote two of the greatest novels ever writtenâ"War and Peace" and "Anna Karenina"âbefore undergoing a spiritual crisis that led him to renounce his literary work and aristocratic lifestyle. His later writings on nonviolent resistance influenced Gandhi and Martin Luther King Jr.\n\nBorn into Russian nobility, Tolstoy fought in the Crimean War, married, had thirteen children, and managed a vast estateâall while producing literature of unparalleled scope and psychological insight.\n\nTolstoy's late philosophyârejecting church, state, and private property in favor of simple Christian ethicsâmade him a spiritual leader to thousands who pilgrimaged to his estate. His influence spans literature, pacifism, and movements for social justice.`,
                 
-                'Friedrich Nietzsche': `Friedrich Nietzsche (1844-1900) declared "God is dead" and challenged the foundations of Western morality with concepts like the will to power, the Übermensch, and eternal recurrence. His aphoristic, passionate style influenced literature as much as philosophy.\n\nPlagued by illness and isolation, he produced his major works in a burst of creativity before mental collapse at age 44. His sister's later editing distorted his work, falsely associating him with Nazism—an ideology he explicitly rejected.\n\nNietzsche's influence extends across philosophy, psychology, literature, and art. His critique of conventional morality, celebration of creativity, and call to "become who you are" continue to challenge and inspire readers willing to engage with his difficult, exhilarating thought.`,
+                'Friedrich Nietzsche': `Friedrich Nietzsche (1844-1900) declared "God is dead" and challenged the foundations of Western morality with concepts like the will to power, the Ãbermensch, and eternal recurrence. His aphoristic, passionate style influenced literature as much as philosophy.\n\nPlagued by illness and isolation, he produced his major works in a burst of creativity before mental collapse at age 44. His sister's later editing distorted his work, falsely associating him with Nazismâan ideology he explicitly rejected.\n\nNietzsche's influence extends across philosophy, psychology, literature, and art. His critique of conventional morality, celebration of creativity, and call to "become who you are" continue to challenge and inspire readers willing to engage with his difficult, exhilarating thought.`,
                 
-                'Jane Austen': `Jane Austen (1775-1817) wrote six novels that transformed the English novel through wit, irony, and psychological insight into the lives of the English gentry. Writing in a small parlor, often hiding her manuscripts when visitors arrived, she created works that continue to captivate readers two centuries later.\n\nHer novels explore marriage, money, and morality in Regency England with a satirical eye and deep sympathy for her heroines' struggles for autonomy and happiness. Published anonymously during her lifetime, she gained recognition only after her death.\n\nAusten's influence on the novel of manners and romantic comedy is immense. Her devoted fans—"Janeites"—span generations, while scholars recognize her as a pioneer of free indirect discourse and the marriage plot that shaped the novel's development.`,
+                'Jane Austen': `Jane Austen (1775-1817) wrote six novels that transformed the English novel through wit, irony, and psychological insight into the lives of the English gentry. Writing in a small parlor, often hiding her manuscripts when visitors arrived, she created works that continue to captivate readers two centuries later.\n\nHer novels explore marriage, money, and morality in Regency England with a satirical eye and deep sympathy for her heroines' struggles for autonomy and happiness. Published anonymously during her lifetime, she gained recognition only after her death.\n\nAusten's influence on the novel of manners and romantic comedy is immense. Her devoted fansâ"Janeites"âspan generations, while scholars recognize her as a pioneer of free indirect discourse and the marriage plot that shaped the novel's development.`,
                 
-                'Charles Dickens': `Charles Dickens (1812-1870) was the most popular novelist of the Victorian era, whose serialized stories captivated readers across class lines. His childhood experience working in a boot-blacking factory while his father was imprisoned for debt fueled his lifelong advocacy for the poor.\n\nHis novels—"Oliver Twist," "David Copperfield," "A Tale of Two Cities," "Great Expectations"—combined social criticism with memorable characters and gripping plots. His public readings drew enormous crowds and helped establish the author as celebrity.\n\nDickens shaped the modern Christmas celebration through "A Christmas Carol" and influenced social reform through his depictions of poverty, child labor, and institutional cruelty. His narrative techniques and character types remain foundational to popular storytelling.`,
+                'Charles Dickens': `Charles Dickens (1812-1870) was the most popular novelist of the Victorian era, whose serialized stories captivated readers across class lines. His childhood experience working in a boot-blacking factory while his father was imprisoned for debt fueled his lifelong advocacy for the poor.\n\nHis novelsâ"Oliver Twist," "David Copperfield," "A Tale of Two Cities," "Great Expectations"âcombined social criticism with memorable characters and gripping plots. His public readings drew enormous crowds and helped establish the author as celebrity.\n\nDickens shaped the modern Christmas celebration through "A Christmas Carol" and influenced social reform through his depictions of poverty, child labor, and institutional cruelty. His narrative techniques and character types remain foundational to popular storytelling.`,
                 
-                'Emily Dickinson': `Emily Dickinson (1830-1886) wrote nearly 1,800 poems in her Amherst, Massachusetts home, yet published fewer than a dozen during her lifetime. Her radical experiments with form, punctuation, and imagery were too unconventional for 19th-century editors.\n\nIncreasingly reclusive in her later years, she maintained intense friendships through correspondence while exploring themes of death, immortality, nature, and consciousness in poems of compressed power.\n\nDickinson is now recognized as one of America's greatest poets. Her influence on modern poetry—her slant rhymes, dashes, and psychological intensity—anticipated modernist experimentation by decades. Each generation discovers new depths in her seemingly simple but endlessly complex verses.`,
+                'Emily Dickinson': `Emily Dickinson (1830-1886) wrote nearly 1,800 poems in her Amherst, Massachusetts home, yet published fewer than a dozen during her lifetime. Her radical experiments with form, punctuation, and imagery were too unconventional for 19th-century editors.\n\nIncreasingly reclusive in her later years, she maintained intense friendships through correspondence while exploring themes of death, immortality, nature, and consciousness in poems of compressed power.\n\nDickinson is now recognized as one of America's greatest poets. Her influence on modern poetryâher slant rhymes, dashes, and psychological intensityâanticipated modernist experimentation by decades. Each generation discovers new depths in her seemingly simple but endlessly complex verses.`,
                 
-                'Walt Whitman': `Walt Whitman (1819-1892) self-published "Leaves of Grass" in 1855, a revolutionary collection that celebrated democracy, the body, and the American landscape in free verse of unprecedented scope and intimacy. Emerson hailed it as "the most extraordinary piece of wit and wisdom America has yet contributed."\n\nWhitman continually revised and expanded the book throughout his life. During the Civil War, he volunteered as a nurse in Washington hospitals, experiences that deepened his poetry's compassion and his vision of American identity.\n\nWhitman's influence on American poetry is foundational—his free verse, his celebration of ordinary experience, and his democratic embrace of all people opened possibilities that poets from Ginsberg to contemporary spoken word artists continue to explore.`,
+                'Walt Whitman': `Walt Whitman (1819-1892) self-published "Leaves of Grass" in 1855, a revolutionary collection that celebrated democracy, the body, and the American landscape in free verse of unprecedented scope and intimacy. Emerson hailed it as "the most extraordinary piece of wit and wisdom America has yet contributed."\n\nWhitman continually revised and expanded the book throughout his life. During the Civil War, he volunteered as a nurse in Washington hospitals, experiences that deepened his poetry's compassion and his vision of American identity.\n\nWhitman's influence on American poetry is foundationalâhis free verse, his celebration of ordinary experience, and his democratic embrace of all people opened possibilities that poets from Ginsberg to contemporary spoken word artists continue to explore.`,
                 
                 // 20th Century figures
-                'Albert Einstein': `Albert Einstein (1879-1955) transformed our understanding of space, time, matter, and energy with his theories of special and general relativity. His equation E=mc² revealed the enormous energy locked in matter, with consequences that shaped the atomic age.\n\nForced to flee Nazi Germany in 1933, he spent his final decades at Princeton, working toward a unified field theory and advocating for pacifism, civil rights, and world government. His letter to Roosevelt warning of German atomic bomb research helped launch the Manhattan Project—a decision he later regretted.\n\nEinstein's scientific genius made him a global celebrity and symbol of intellectual achievement. His humanitarian activism, from Zionism to nuclear disarmament, demonstrated his belief that scientists bear moral responsibility for how their discoveries are used.`,
+                'Albert Einstein': `Albert Einstein (1879-1955) transformed our understanding of space, time, matter, and energy with his theories of special and general relativity. His equation E=mcÂ² revealed the enormous energy locked in matter, with consequences that shaped the atomic age.\n\nForced to flee Nazi Germany in 1933, he spent his final decades at Princeton, working toward a unified field theory and advocating for pacifism, civil rights, and world government. His letter to Roosevelt warning of German atomic bomb research helped launch the Manhattan Projectâa decision he later regretted.\n\nEinstein's scientific genius made him a global celebrity and symbol of intellectual achievement. His humanitarian activism, from Zionism to nuclear disarmament, demonstrated his belief that scientists bear moral responsibility for how their discoveries are used.`,
                 
-                'Mahatma Gandhi': `Mahatma Gandhi (1869-1948) led India to independence through nonviolent civil disobedience, inspiring movements for civil rights and freedom across the world. His philosophy of satyagraha—truth-force—combined spiritual discipline with political action.\n\nTrained as a lawyer in London, Gandhi developed his methods of nonviolent resistance while fighting discrimination against Indians in South Africa. Returning to India, he transformed the independence movement through campaigns of non-cooperation, salt marches, and fasting.\n\nGandhi's influence extends far beyond India. Martin Luther King Jr., Nelson Mandela, and countless other activists adopted his methods. His vision of a simple, self-sufficient society and his experiments with communal living continue to inspire alternative communities and sustainability movements.`,
+                'Mahatma Gandhi': `Mahatma Gandhi (1869-1948) led India to independence through nonviolent civil disobedience, inspiring movements for civil rights and freedom across the world. His philosophy of satyagrahaâtruth-forceâcombined spiritual discipline with political action.\n\nTrained as a lawyer in London, Gandhi developed his methods of nonviolent resistance while fighting discrimination against Indians in South Africa. Returning to India, he transformed the independence movement through campaigns of non-cooperation, salt marches, and fasting.\n\nGandhi's influence extends far beyond India. Martin Luther King Jr., Nelson Mandela, and countless other activists adopted his methods. His vision of a simple, self-sufficient society and his experiments with communal living continue to inspire alternative communities and sustainability movements.`,
                 
-                'Winston Churchill': `Winston Churchill (1874-1965) led Britain through World War II with oratory that rallied a nation facing invasion. His speeches—"We shall fight on the beaches," "Their finest hour"—became symbols of democratic resistance to tyranny.\n\nHis career before the war included controversial decisions from the Gallipoli disaster to the Bengal famine, reflecting the complexities of empire. After leading wartime Britain, voters rejected him in 1945, only to return him to power in 1951.\n\nChurchill's legacy is debated—celebrated for wartime leadership, criticized for imperialism and other decisions. His histories and memoirs won the Nobel Prize in Literature. His example of leadership in crisis remains studied and invoked, particularly in times of democratic threat.`,
+                'Winston Churchill': `Winston Churchill (1874-1965) led Britain through World War II with oratory that rallied a nation facing invasion. His speechesâ"We shall fight on the beaches," "Their finest hour"âbecame symbols of democratic resistance to tyranny.\n\nHis career before the war included controversial decisions from the Gallipoli disaster to the Bengal famine, reflecting the complexities of empire. After leading wartime Britain, voters rejected him in 1945, only to return him to power in 1951.\n\nChurchill's legacy is debatedâcelebrated for wartime leadership, criticized for imperialism and other decisions. His histories and memoirs won the Nobel Prize in Literature. His example of leadership in crisis remains studied and invoked, particularly in times of democratic threat.`,
                 
                 'Martin Luther King Jr.': `Martin Luther King Jr. (1929-1968) led the American civil rights movement through nonviolent protest, his oratory and moral vision transforming American society. His "I Have a Dream" speech remains one of history's most powerful calls for justice and equality.\n\nA Baptist minister deeply influenced by Gandhi, King organized the Montgomery Bus Boycott, the March on Washington, and campaigns across the South that led to the Civil Rights Act of 1964 and Voting Rights Act of 1965. He was assassinated in Memphis at age 39.\n\nKing's legacy continues to shape American discussions of race, justice, and nonviolent change. His later work on poverty and opposition to the Vietnam War revealed a broader vision of social transformation that remains relevant to contemporary movements for justice.`,
                 
                 'Mother Teresa': `Mother Teresa (1910-1997) founded the Missionaries of Charity in Calcutta (Kolkata), dedicating her life to serving "the poorest of the poor." Her work with the dying, the diseased, and the abandoned made her a global symbol of compassionate service.\n\nBorn in Macedonia to Albanian parents, she joined the Sisters of Loreto at 18 and taught in India before experiencing a "call within a call" to serve the poorest. Her order grew to thousands of sisters serving in over 130 countries.\n\nMother Teresa received the Nobel Peace Prize in 1979 and was canonized as a saint in 2016. Her legacy includes both admiration for her dedication to the suffering and criticism of her views on poverty, medical care, and religious conversion.`,
                 
-                'Eleanor Roosevelt': `Eleanor Roosevelt (1884-1962) transformed the role of First Lady into a platform for social activism, civil rights advocacy, and international human rights. After FDR's death, she served as a delegate to the United Nations, chairing the committee that drafted the Universal Declaration of Human Rights.\n\nOvercoming a difficult childhood and her husband's infidelity, she became one of the most influential women of the 20th century. Her newspaper column "My Day" reached millions, while her advocacy challenged racism, poverty, and women's exclusion from public life.\n\nThe Universal Declaration of Human Rights remains her greatest legacy—a document she called "the international Magna Carta" that continues to shape human rights law and advocacy worldwide.`,
+                'Eleanor Roosevelt': `Eleanor Roosevelt (1884-1962) transformed the role of First Lady into a platform for social activism, civil rights advocacy, and international human rights. After FDR's death, she served as a delegate to the United Nations, chairing the committee that drafted the Universal Declaration of Human Rights.\n\nOvercoming a difficult childhood and her husband's infidelity, she became one of the most influential women of the 20th century. Her newspaper column "My Day" reached millions, while her advocacy challenged racism, poverty, and women's exclusion from public life.\n\nThe Universal Declaration of Human Rights remains her greatest legacyâa document she called "the international Magna Carta" that continues to shape human rights law and advocacy worldwide.`,
                 
                 'Nelson Mandela': `Nelson Mandela (1918-2013) spent 27 years imprisoned for opposing South African apartheid, emerging to lead his country's transition to multiracial democracy as its first Black president. His capacity for reconciliation rather than revenge became a model for peaceful political transformation.\n\nAs a young lawyer and ANC activist, he initially embraced nonviolence before turning to armed resistance when peaceful protest was met with massacres. Prison became an unlikely crucible for the wisdom and magnanimity he would later display.\n\nMandela's legacy extends beyond South Africa to inspire movements for justice worldwide. His emphasis on forgiveness, dialogue with enemies, and building inclusive national identity offers lessons for divided societies everywhere.`,
                 
-                'Sun Tzu': `Sun Tzu (544-496 BCE) was a Chinese military strategist and philosopher, traditionally credited as the author of "The Art of War," one of the most influential works on military strategy ever written. He served as a general for King Helü of Wu during the Spring and Autumn period.\n\nHis treatise transcends military tactics to address broader principles of conflict, competition, and leadership. Sun Tzu emphasized winning without fighting, understanding your enemy, and the importance of flexibility and deception in achieving objectives.\n\nThe Art of War has influenced military thinking for over two millennia and remains required reading at military academies worldwide. Its principles have been applied to business strategy, sports coaching, legal practice, and any field involving competition and strategic thinking.`,
+                'Sun Tzu': `Sun Tzu (544-496 BCE) was a Chinese military strategist and philosopher, traditionally credited as the author of "The Art of War," one of the most influential works on military strategy ever written. He served as a general for King HelÃ¼ of Wu during the Spring and Autumn period.\n\nHis treatise transcends military tactics to address broader principles of conflict, competition, and leadership. Sun Tzu emphasized winning without fighting, understanding your enemy, and the importance of flexibility and deception in achieving objectives.\n\nThe Art of War has influenced military thinking for over two millennia and remains required reading at military academies worldwide. Its principles have been applied to business strategy, sports coaching, legal practice, and any field involving competition and strategic thinking.`,
                 
-                'Epicurus': `Epicurus (341-270 BCE) founded one of the major philosophical schools of ancient Greece, teaching in his garden in Athens. His philosophy sought happiness through the pursuit of pleasure—but defined pleasure as the absence of pain and anxiety rather than indulgence.\n\nHe taught that fear of death and the gods caused unnecessary suffering, and that simple pleasures, friendship, and philosophical contemplation led to tranquility (ataraxia). His school was revolutionary in welcoming women and slaves as equal participants.\n\nEpicureanism influenced Roman thinkers like Lucretius and has experienced revival in modern times. His emphasis on friendship, simple living, and freedom from anxiety resonates with contemporary mindfulness movements and secular approaches to well-being.`,
+                'Epicurus': `Epicurus (341-270 BCE) founded one of the major philosophical schools of ancient Greece, teaching in his garden in Athens. His philosophy sought happiness through the pursuit of pleasureâbut defined pleasure as the absence of pain and anxiety rather than indulgence.\n\nHe taught that fear of death and the gods caused unnecessary suffering, and that simple pleasures, friendship, and philosophical contemplation led to tranquility (ataraxia). His school was revolutionary in welcoming women and slaves as equal participants.\n\nEpicureanism influenced Roman thinkers like Lucretius and has experienced revival in modern times. His emphasis on friendship, simple living, and freedom from anxiety resonates with contemporary mindfulness movements and secular approaches to well-being.`,
                 
                 'Frederick Douglass': `Frederick Douglass (1818-1895) escaped slavery to become the most influential African American leader of the 19th century. His autobiographies exposed slavery's brutality, while his oratory galvanized the abolition movement and later the fight for civil rights and women's suffrage.\n\nBorn into slavery in Maryland, he taught himself to read and write before escaping to the North. His eloquence challenged racist assumptions about Black intellectual capacity and forced white Americans to confront slavery's moral horror.\n\nDouglass advised President Lincoln during the Civil War, recruited Black soldiers for the Union Army, and fought for constitutional amendments guaranteeing Black citizenship and voting rights. His words on justice, freedom, and the meaning of American ideals remain powerful today.`,
                 
-                'Booker T. Washington': `Booker T. Washington (1856-1915) rose from slavery to become the most prominent African American leader of his era, founding the Tuskegee Institute and advising presidents on race relations. His emphasis on vocational education and economic self-improvement shaped Black advancement for decades.\n\nBorn into slavery in Virginia, he worked his way through school and became an educator. His Atlanta Compromise speech of 1895 advocated accommodation with segregation in exchange for economic opportunity—a position later challenged by W.E.B. Du Bois.\n\nWashington's legacy is complex: he publicly accommodated Jim Crow while secretly funding legal challenges to segregation. His emphasis on self-help, education, and entrepreneurship continues to influence debates about economic empowerment and social change.`,
+                'Booker T. Washington': `Booker T. Washington (1856-1915) rose from slavery to become the most prominent African American leader of his era, founding the Tuskegee Institute and advising presidents on race relations. His emphasis on vocational education and economic self-improvement shaped Black advancement for decades.\n\nBorn into slavery in Virginia, he worked his way through school and became an educator. His Atlanta Compromise speech of 1895 advocated accommodation with segregation in exchange for economic opportunityâa position later challenged by W.E.B. Du Bois.\n\nWashington's legacy is complex: he publicly accommodated Jim Crow while secretly funding legal challenges to segregation. His emphasis on self-help, education, and entrepreneurship continues to influence debates about economic empowerment and social change.`,
                 
-                'Susan B. Anthony': `Susan B. Anthony (1820-1906) dedicated her life to women's suffrage, becoming the movement's most recognizable leader. She traveled constantly, gave thousands of speeches, and was arrested for voting illegally in 1872—using her trial to publicize the cause.\n\nRaised in a Quaker family committed to social justice, she began as an abolitionist and temperance activist before focusing on women's rights. Her partnership with Elizabeth Cady Stanton produced decades of organizing, publishing, and lobbying for constitutional change.\n\nAnthony died fourteen years before the 19th Amendment granted women the right to vote, but the amendment is often called the Susan B. Anthony Amendment in her honor. Her image on the dollar coin recognized her role in expanding American democracy.`,
+                'Susan B. Anthony': `Susan B. Anthony (1820-1906) dedicated her life to women's suffrage, becoming the movement's most recognizable leader. She traveled constantly, gave thousands of speeches, and was arrested for voting illegally in 1872âusing her trial to publicize the cause.\n\nRaised in a Quaker family committed to social justice, she began as an abolitionist and temperance activist before focusing on women's rights. Her partnership with Elizabeth Cady Stanton produced decades of organizing, publishing, and lobbying for constitutional change.\n\nAnthony died fourteen years before the 19th Amendment granted women the right to vote, but the amendment is often called the Susan B. Anthony Amendment in her honor. Her image on the dollar coin recognized her role in expanding American democracy.`,
                 
                 'Theodore Roosevelt': `Theodore Roosevelt (1858-1919) served as the 26th President of the United States, bringing progressive reform, conservation, and American power to the world stage. His forceful personality and quotable wisdom made him one of the most memorable presidents in American history.\n\nOvercoming childhood illness through vigorous exercise, he became a rancher, soldier, police commissioner, and governor before ascending to the presidency after McKinley's assassination. He busted trusts, protected wilderness, and projected American power through the "Big Stick" policy.\n\nRoosevelt's progressive legacy includes national parks, food safety laws, and the Panama Canal. His emphasis on the strenuous life, conservation, and active citizenship continues to influence American political culture across the ideological spectrum.`,
                 
@@ -10359,17 +10379,17 @@
                 
                 'Anne Frank': `Anne Frank (1929-1945) was a German-Dutch Jewish girl who documented her life in hiding during the Nazi occupation of the Netherlands. Her diary, published after her death, became one of the most widely read accounts of the Holocaust.\n\nFor over two years, Anne and her family hid in a secret annex behind her father's office building in Amsterdam. During this time, she wrote extensively about her hopes, fears, and the ordinary struggles of adolescence amid extraordinary circumstances.\n\nAnne died in the Bergen-Belsen concentration camp just weeks before liberation. Her father Otto, the family's sole survivor, published her diary in 1947. It has since been translated into over 70 languages and remains a powerful testament to human resilience and the importance of bearing witness.`,
                 
-                'Anaïs Nin': `Anaïs Nin (1903-1977) was a French-Cuban American diarist, essayist, and novelist known for her extensive journals spanning over sixty years. Her frank explorations of female sexuality and the inner life were groundbreaking for their time.\n\nBorn in France to Cuban parents, she began her diary at age eleven during a voyage to America. Her literary circle included Henry Miller, Lawrence Durrell, and other modernist writers. She pioneered the publication of erotica written from a female perspective.\n\nNin's diaries, published in multiple volumes, are considered her masterwork—a unique literary achievement that blurs the boundaries between autobiography and art. Her influence on feminist literature and the personal essay form remains significant.`,
+                'AnaÃ¯s Nin': `AnaÃ¯s Nin (1903-1977) was a French-Cuban American diarist, essayist, and novelist known for her extensive journals spanning over sixty years. Her frank explorations of female sexuality and the inner life were groundbreaking for their time.\n\nBorn in France to Cuban parents, she began her diary at age eleven during a voyage to America. Her literary circle included Henry Miller, Lawrence Durrell, and other modernist writers. She pioneered the publication of erotica written from a female perspective.\n\nNin's diaries, published in multiple volumes, are considered her masterworkâa unique literary achievement that blurs the boundaries between autobiography and art. Her influence on feminist literature and the personal essay form remains significant.`,
                 
                 'Simone de Beauvoir': `Simone de Beauvoir (1908-1986) was a French existentialist philosopher, writer, and feminist theorist whose book "The Second Sex" became a foundational text of contemporary feminism. Her analysis of women's oppression influenced generations of feminist thought.\n\nA lifelong companion of Jean-Paul Sartre, she was a central figure in French intellectual life. Her novels, including "The Mandarins" (which won the Prix Goncourt), explored existentialist themes of freedom, responsibility, and authentic living.\n\nDe Beauvoir's famous statement "One is not born, but rather becomes, a woman" challenged essentialist views of gender and laid groundwork for modern gender studies. Her work continues to shape discussions of gender, identity, and liberation.`,
                 
-                'Steve Jobs': `Steve Jobs (1955-2011) co-founded Apple Computer and transformed multiple industries—personal computing, animated films, music, phones, and tablet computing. His emphasis on design, user experience, and integration of hardware and software created products that changed how we live.\n\nAdopted at birth and a college dropout, Jobs started Apple in his parents' garage with Steve Wozniak. After being ousted from Apple in 1985, he founded NeXT and Pixar before returning to save Apple from near-bankruptcy in 1997.\n\nJobs's famous Stanford commencement speech, delivered after his cancer diagnosis, urged graduates to follow their passion and embrace life's uncertainty. His legacy extends beyond products to a philosophy of innovation that combines technology with humanities.`,
+                'Steve Jobs': `Steve Jobs (1955-2011) co-founded Apple Computer and transformed multiple industriesâpersonal computing, animated films, music, phones, and tablet computing. His emphasis on design, user experience, and integration of hardware and software created products that changed how we live.\n\nAdopted at birth and a college dropout, Jobs started Apple in his parents' garage with Steve Wozniak. After being ousted from Apple in 1985, he founded NeXT and Pixar before returning to save Apple from near-bankruptcy in 1997.\n\nJobs's famous Stanford commencement speech, delivered after his cancer diagnosis, urged graduates to follow their passion and embrace life's uncertainty. His legacy extends beyond products to a philosophy of innovation that combines technology with humanities.`,
                 
                 'Alice Walker': `Alice Walker (born 1944) is an American novelist, poet, and activist best known for "The Color Purple," which won the Pulitzer Prize and National Book Award. Her work explores African American women's experiences with honesty, spirituality, and hope.\n\nRaised in rural Georgia as the daughter of sharecroppers, Walker became active in the civil rights movement. She coined the term "womanist" to describe feminism rooted in Black women's experiences and has advocated for numerous social justice causes.\n\nWalker's writing celebrates the resilience of Black women and the healing power of creativity and connection. "The Color Purple" has been adapted into an acclaimed film and Broadway musical, reaching millions with its message of transformation and self-discovery.`,
                 
-                'Moses Maimonides': `Moses Maimonides (1138-1204) was a Sephardic Jewish philosopher, astronomer, and physician who became one of the most influential Torah scholars of the Middle Ages. Born in Córdoba during the Islamic Golden Age, he fled persecution and eventually settled in Egypt, where he served as physician to the Sultan.\n\nHis "Guide for the Perplexed" attempted to reconcile Aristotelian philosophy with Jewish theology, profoundly influencing both Jewish and Christian thought. His codification of Jewish law in the Mishneh Torah remains authoritative today.\n\nMaimonides bridged cultures during a remarkable period of Jewish-Islamic intellectual exchange. His rational approach to faith and his ethical writings continue to guide religious and philosophical inquiry across traditions.`,
+                'Moses Maimonides': `Moses Maimonides (1138-1204) was a Sephardic Jewish philosopher, astronomer, and physician who became one of the most influential Torah scholars of the Middle Ages. Born in CÃ³rdoba during the Islamic Golden Age, he fled persecution and eventually settled in Egypt, where he served as physician to the Sultan.\n\nHis "Guide for the Perplexed" attempted to reconcile Aristotelian philosophy with Jewish theology, profoundly influencing both Jewish and Christian thought. His codification of Jewish law in the Mishneh Torah remains authoritative today.\n\nMaimonides bridged cultures during a remarkable period of Jewish-Islamic intellectual exchange. His rational approach to faith and his ethical writings continue to guide religious and philosophical inquiry across traditions.`,
                 
-                'Meister Eckhart': `Meister Eckhart (1260-1328) was a German theologian, philosopher, and mystic whose radical sermons on the soul's unity with God attracted both devoted followers and charges of heresy. A Dominican friar, he preached in the vernacular German, making profound spiritual ideas accessible to ordinary people.\n\nHis mystical theology emphasized detachment, the birth of the Word in the soul, and the spark of divinity within each person. Though condemned posthumously, his ideas influenced later mystics, German Idealism, and modern spirituality.\n\nEckhart's paradoxical language and apophatic theology—describing God by what God is not—continue to challenge and inspire seekers. His influence extends from Zen Buddhism enthusiasts to contemporary contemplative Christianity.`,
+                'Meister Eckhart': `Meister Eckhart (1260-1328) was a German theologian, philosopher, and mystic whose radical sermons on the soul's unity with God attracted both devoted followers and charges of heresy. A Dominican friar, he preached in the vernacular German, making profound spiritual ideas accessible to ordinary people.\n\nHis mystical theology emphasized detachment, the birth of the Word in the soul, and the spark of divinity within each person. Though condemned posthumously, his ideas influenced later mystics, German Idealism, and modern spirituality.\n\nEckhart's paradoxical language and apophatic theologyâdescribing God by what God is notâcontinue to challenge and inspire seekers. His influence extends from Zen Buddhism enthusiasts to contemporary contemplative Christianity.`,
                 
                 'Julian of Norwich': `Julian of Norwich (1343-1416) was an English anchorite and mystic whose "Revelations of Divine Love" is considered the first book written in English by a woman. After receiving sixteen visions during a near-death illness, she spent decades in an anchorite's cell contemplating their meaning.\n\nHer optimistic theology, centered on God's love rather than judgment, was remarkable for its time. Her famous declaration "All shall be well" emerged from wrestling with evil and suffering, not from naive optimism.\n\nJulian's maternal imagery for God and her emphasis on divine compassion speak powerfully to contemporary readers. Her work has gained renewed appreciation as a profound contribution to Christian mysticism and women's spirituality.`,
                 
@@ -10402,7 +10422,7 @@
         function speakQuote() {
             // Check if browser supports speech synthesis
             if (!('speechSynthesis' in window)) {
-                showShareConfirmation('⚠️ Text-to-speech not supported');
+                showShareConfirmation('â ï¸ Text-to-speech not supported');
                 return;
             }
             
@@ -10416,7 +10436,7 @@
                 window.speechSynthesis.cancel();
                 if (ttsBtn) {
                     ttsBtn.classList.remove('playing');
-                    ttsBtn.textContent = '🔊';
+                    ttsBtn.textContent = 'ð';
                 }
                 if (quoteDisplay) {
                     quoteDisplay.classList.remove('speaking');
@@ -10431,7 +10451,7 @@
                 
                 // Wait for voices to load
                 const timeout = setTimeout(() => {
-                    showShareConfirmation('⚠️ Voice loading timeout');
+                    showShareConfirmation('â ï¸ Voice loading timeout');
                 }, 3000);
                 
                 window.speechSynthesis.onvoiceschanged = () => {
@@ -10462,7 +10482,7 @@
             // Visual feedback
             if (ttsBtn) {
                 ttsBtn.classList.add('playing');
-                ttsBtn.textContent = '⏸️';
+                ttsBtn.textContent = 'â¸ï¸';
             }
             if (quoteDisplay) {
                 quoteDisplay.classList.add('speaking');
@@ -10472,7 +10492,7 @@
             utterance.onend = () => {
                 if (ttsBtn) {
                     ttsBtn.classList.remove('playing');
-                    ttsBtn.textContent = '🔊';
+                    ttsBtn.textContent = 'ð';
                 }
                 if (quoteDisplay) {
                     quoteDisplay.classList.remove('speaking');
@@ -10482,13 +10502,13 @@
             utterance.onerror = (e) => {
                 if (ttsBtn) {
                     ttsBtn.classList.remove('playing');
-                    ttsBtn.textContent = '🔊';
+                    ttsBtn.textContent = 'ð';
                 }
                 if (quoteDisplay) {
                     quoteDisplay.classList.remove('speaking');
                 }
                 console.error('TTS error:', e);
-                showShareConfirmation('⚠️ Audio error');
+                showShareConfirmation('â ï¸ Audio error');
             };
             
             // Speak the quote
@@ -10497,12 +10517,12 @@
             } catch (error) {
                 if (ttsBtn) {
                     ttsBtn.classList.remove('playing');
-                    ttsBtn.textContent = '🔊';
+                    ttsBtn.textContent = 'ð';
                 }
                 if (quoteDisplay) {
                     quoteDisplay.classList.remove('speaking');
                 }
-                showShareConfirmation('⚠️ Could not play audio');
+                showShareConfirmation('â ï¸ Could not play audio');
             }
         }
         
@@ -10573,13 +10593,13 @@
             const guessedAuthor = select.value;
             
             if (!guessedAuthor) {
-                showShareConfirmation('⚠️ Please type and select an author!');
+                showShareConfirmation('â ï¸ Please type and select an author!');
                 return;
             }
             
             // Prevent duplicate guesses
             if (guesses.some(g => g.author === guessedAuthor)) {
-                showShareConfirmation('⚠️ You already guessed ' + guessedAuthor + '!');
+                showShareConfirmation('â ï¸ You already guessed ' + guessedAuthor + '!');
                 resetAutocomplete();
                 return;
             }
@@ -10742,7 +10762,7 @@
             // Update placeholder to show count AND add visual indicator
             const input = document.getElementById('author-input');
             const count = matchingAuthors.length;
-            input.placeholder = `🔍 Filtered: ${count} author${count === 1 ? '' : 's'} remaining`;
+            input.placeholder = `ð Filtered: ${count} author${count === 1 ? '' : 's'} remaining`;
             
             // Add visual class to show filtering is active
             input.classList.add('filtered');
@@ -10756,7 +10776,7 @@
             let hintsHTML = '';
             
             if (isCorrect) {
-                hintsHTML = '<span class="hint-tag correct">✓ Correct!</span>';
+                hintsHTML = '<span class="hint-tag correct">â Correct!</span>';
             } else {
                 if (gameDifficulty === 'easy') {
                     // Show all hints in easy mode
@@ -10766,18 +10786,18 @@
                     
                     hintsHTML = `
                         <span class="hint-tag ${genderMatch ? 'correct' : 'incorrect'}">
-                            Gender: ${guessedQuote.gender} ${genderMatch ? '✓' : '✗'}
+                            Gender: ${guessedQuote.gender} ${genderMatch ? 'â' : 'â'}
                         </span>
                         <span class="hint-tag ${categoryMatch ? 'correct' : 'incorrect'}">
-                            Category: ${guessedQuote.category} ${categoryMatch ? '✓' : '✗'}
+                            Category: ${guessedQuote.category} ${categoryMatch ? 'â' : 'â'}
                         </span>
                         <span class="hint-tag ${periodMatch ? 'correct' : 'incorrect'}">
-                            Period: ${guessedQuote.period} ${periodMatch ? '✓' : '✗'}
+                            Period: ${guessedQuote.period} ${periodMatch ? 'â' : 'â'}
                         </span>
                     `;
                 } else {
                     // Hard mode - no hints
-                    hintsHTML = '<span class="hint-tag incorrect">✗ Incorrect</span>';
+                    hintsHTML = '<span class="hint-tag incorrect">â Incorrect</span>';
                 }
             }
             
@@ -10900,7 +10920,7 @@
                     const pRate = pStats.played > 0 ? Math.round((pStats.won / pStats.played) * 100) : 0;
                     return `
                         <div style="margin-top: 18px; padding: 15px; background: rgba(212, 175, 55, 0.15); border: 2px solid var(--gold); border-radius: 8px;">
-                            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 12px; text-align: center; font-size: 1.15rem;">📅 Practice Stats</h3>
+                            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 12px; text-align: center; font-size: 1.15rem;">ð Practice Stats</h3>
                             <div style="display: flex; justify-content: space-around; text-align: center;">
                                 <div>
                                     <div style="font-size: 1.5rem; font-weight: bold; color: var(--burgundy);">${pStats.played}</div>
@@ -10928,7 +10948,7 @@
                                 font-size: 0.9rem;
                                 font-weight: 600;
                                 cursor: pointer;
-                            ">📅 Play Another</button>
+                            ">ð Play Another</button>
                             <button onclick="returnToDaily()" style="
                                 padding: 12px 24px;
                                 background: var(--cream);
@@ -10939,13 +10959,13 @@
                                 font-size: 0.9rem;
                                 font-weight: 600;
                                 cursor: pointer;
-                            ">🏠 Daily Puzzle</button>
+                            ">ð  Daily Puzzle</button>
                         </div>
                     `;
                 } else {
                     return `
                         <div style="margin-top: 18px; padding: 15px; background: var(--cream); border: 2px solid var(--ink); border-radius: 8px;">
-                            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 12px; text-align: center; font-size: 1.15rem;">📊 Your Statistics</h3>
+                            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 12px; text-align: center; font-size: 1.15rem;">ð Your Statistics</h3>
                             ${showStats()}
                         </div>
                         
@@ -10974,7 +10994,7 @@
                 const perfectGame = guesses.length === 1;
                 gameOverScreen.innerHTML = `
                     <div class="game-over">
-                        <h2>${perfectGame ? '🎯 PERFECT! 🎯' : '🎉 Brilliant!'}</h2>
+                        <h2>${perfectGame ? 'ð¯ PERFECT! ð¯' : 'ð Brilliant!'}</h2>
                         <p>${perfectGame ? '<strong style="font-size: 1.1rem; color: var(--gold);">FIRST TRY!</strong><br>' : ''}You got it in ${guesses.length} ${guesses.length === 1 ? 'try' : 'tries'}!</p>
                         <div class="reveal">
                             <strong>${currentQuote.author}</strong><br>
@@ -10983,14 +11003,14 @@
                                target="_blank" 
                                rel="noopener noreferrer"
                                style="color: var(--burgundy); text-decoration: none; font-size: 0.85rem; margin-top: 6px; display: inline-block;">
-                               📚 Learn more →
+                               ð Learn more â
                             </a>
                         </div>
                         
                         <!-- Action buttons - mobile optimized -->
                         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px;">
                             <div style="padding: 10px 16px; background: ${diffColor}; color: white; border-radius: 20px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 0.8rem; display: flex; align-items: center; gap: 5px;">
-                                ⭐ ${currentQuote.difficulty}/10
+                                â­ ${currentQuote.difficulty}/10
                             </div>
                             <button onclick="shareResults()" style="
                                 padding: 10px 20px;
@@ -11007,17 +11027,17 @@
                                 gap: 6px;
                                 box-shadow: 0 3px 10px rgba(212,175,55,0.35);
                             ">
-                                📤 Share
+                                ð¤ Share
                             </button>
                         </div>
                         
                         <!-- Deep Dive Section - auto-loads -->
                         <div id="deep-dive-section" style="margin-top: 18px; padding: 15px; background: linear-gradient(135deg, rgba(139,38,53,0.08) 0%, rgba(168,186,143,0.08) 100%); border: 2px solid var(--burgundy); border-radius: 10px;">
                             <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 12px; text-align: center; font-size: 1.1rem; color: var(--burgundy);">
-                                🎓 Historical Context
+                                ð Historical Context
                             </h3>
                             <div id="deep-dive-content" style="text-align: center; padding: 10px;">
-                                <div style="font-size: 1.3rem; margin-bottom: 6px;">⏳</div>
+                                <div style="font-size: 1.3rem; margin-bottom: 6px;">â³</div>
                                 <div style="font-size: 0.85rem; color: var(--slate);">Loading...</div>
                             </div>
                         </div>
@@ -11037,14 +11057,14 @@
                                target="_blank" 
                                rel="noopener noreferrer"
                                style="color: var(--burgundy); text-decoration: none; font-size: 0.85rem; margin-top: 6px; display: inline-block;">
-                               📚 Learn more →
+                               ð Learn more â
                             </a>
                         </div>
                         
                         <!-- Action buttons - mobile optimized -->
                         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px;">
                             <div style="padding: 10px 16px; background: ${diffColor}; color: white; border-radius: 20px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 0.8rem; display: flex; align-items: center; gap: 5px;">
-                                ⭐ ${currentQuote.difficulty}/10
+                                â­ ${currentQuote.difficulty}/10
                             </div>
                             <button onclick="shareResults()" style="
                                 padding: 10px 20px;
@@ -11061,17 +11081,17 @@
                                 gap: 6px;
                                 box-shadow: 0 3px 10px rgba(212,175,55,0.35);
                             ">
-                                📤 Share
+                                ð¤ Share
                             </button>
                         </div>
                         
                         <!-- Deep Dive Section - auto-loads -->
                         <div id="deep-dive-section" style="margin-top: 18px; padding: 15px; background: linear-gradient(135deg, rgba(139,38,53,0.08) 0%, rgba(168,186,143,0.08) 100%); border: 2px solid var(--burgundy); border-radius: 10px;">
                             <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 12px; text-align: center; font-size: 1.1rem; color: var(--burgundy);">
-                                🎓 Historical Context
+                                ð Historical Context
                             </h3>
                             <div id="deep-dive-content" style="text-align: center; padding: 10px;">
-                                <div style="font-size: 1.3rem; margin-bottom: 6px;">⏳</div>
+                                <div style="font-size: 1.3rem; margin-bottom: 6px;">â³</div>
                                 <div style="font-size: 0.85rem; color: var(--slate);">Loading...</div>
                             </div>
                         </div>
@@ -11169,9 +11189,9 @@
         // Initialize Game Shelf Integration
         GameShelfIntegration.init('quotle', {
             name: 'Quotle',
-            icon: '💬',
+            icon: 'ð¬',
             url: 'quotle.game',
-            version: '1.0.2',
+            version: '1.0.4',
             type: 'daily'
         });
         
@@ -11192,6 +11212,136 @@
         
         // Start game on load
         initGame();
+    </script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('[Quotle] SW registered:', registration.scope);
+                        
+                        // Check for updates periodically
+                        setInterval(() => {
+                            registration.update();
+                        }, 60 * 60 * 1000); // Check every hour
+                        
+                        // Listen for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available
+                                    console.log('[Quotle] New version available');
+                                    if (confirm('A new version of Quotle is available! Reload to update?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch((error) => {
+                        console.log('[Quotle] SW registration failed:', error);
+                    });
+            });
+            
+            // Handle SW messages
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data.type === 'SW_UPDATED') {
+                    console.log('[Quotle] SW updated to:', event.data.version);
+                }
+            });
+        }
+        
+        // PWA Install Prompt
+        let deferredInstallPrompt = null;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+            
+            // Show install button if not already installed
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                showInstallButton();
+            }
+        });
+        
+        function showInstallButton() {
+            // Check if we already showed install prompt this session
+            if (sessionStorage.getItem('quotle_install_prompted')) return;
+            
+            // Create install banner
+            const banner = document.createElement('div');
+            banner.id = 'pwa-install-banner';
+            banner.innerHTML = `
+                <div style="
+                    position: fixed;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #8B2635, #6B1D29);
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    z-index: 9999;
+                    font-family: 'Source Serif 4', serif;
+                    max-width: 90%;
+                ">
+                    <span style="font-size: 1.5rem;">ð</span>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">Install Quotle</div>
+                        <div style="font-size: 0.85rem; opacity: 0.9;">Add to home screen for the best experience</div>
+                    </div>
+                    <button onclick="installPWA()" style="
+                        background: white;
+                        color: #8B2635;
+                        border: none;
+                        padding: 8px 16px;
+                        border-radius: 8px;
+                        font-weight: 600;
+                        cursor: pointer;
+                    ">Install</button>
+                    <button onclick="dismissInstallBanner()" style="
+                        background: transparent;
+                        border: none;
+                        color: white;
+                        font-size: 1.2rem;
+                        cursor: pointer;
+                        padding: 4px;
+                        opacity: 0.7;
+                    ">â</button>
+                </div>
+            `;
+            document.body.appendChild(banner);
+        }
+        
+        function installPWA() {
+            if (!deferredInstallPrompt) return;
+            
+            deferredInstallPrompt.prompt();
+            deferredInstallPrompt.userChoice.then((choice) => {
+                console.log('[Quotle] Install choice:', choice.outcome);
+                deferredInstallPrompt = null;
+                dismissInstallBanner();
+            });
+        }
+        
+        function dismissInstallBanner() {
+            const banner = document.getElementById('pwa-install-banner');
+            if (banner) banner.remove();
+            sessionStorage.setItem('quotle_install_prompted', 'true');
+        }
+        
+        // Check if running as installed PWA
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('[Quotle] Running as installed PWA');
+        }
     </script>
 </body>
 </html>
