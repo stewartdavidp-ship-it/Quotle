@@ -2,7 +2,7 @@
  * Quotle PWA Service Worker
  * Version: 1.0.3
  * 
- * â ï¸ IMPORTANT: CACHE_VERSION must match app version!
+ * ⚠️ IMPORTANT: CACHE_VERSION must match app version!
  * When updating the app, change both:
  * 1. The version in index.html <meta name="version">
  * 2. CACHE_VERSION below
